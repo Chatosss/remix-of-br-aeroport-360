@@ -1,4 +1,5 @@
 import { Keyboard, Zap, FileText } from "lucide-react";
+import { motion } from "framer-motion";
 
 const steps = [
   {
@@ -25,10 +26,16 @@ const StepsSection = () => {
   return (
     <section className="py-24 px-6 bg-secondary/30">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           Da inserção de dados ao relatório final em{" "}
           <span className="gradient-text">3 passos simples</span>
-        </h2>
+        </motion.h2>
 
         <div className="relative">
           {/* Vertical line */}
@@ -36,11 +43,15 @@ const StepsSection = () => {
 
           <div className="space-y-16">
             {steps.map((s, i) => (
-              <div
+              <motion.div
                 key={s.num}
                 className={`flex flex-col md:flex-row items-center gap-8 ${
                   i % 2 !== 0 ? "md:flex-row-reverse" : ""
                 }`}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
               >
                 <div className="flex-1 text-center md:text-left">
                   <span className="text-5xl font-black text-primary/20">
@@ -55,12 +66,19 @@ const StepsSection = () => {
                 </div>
 
                 {/* Center node */}
-                <div className="relative z-10 w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center shrink-0">
+                <motion.div
+                  className="relative z-10 w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center shrink-0"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ type: "spring", stiffness: 200, delay: i * 0.15 + 0.2 }}
+                  whileHover={{ scale: 1.15, borderColor: "hsl(210 100% 56%)" }}
+                >
                   <s.icon className="w-7 h-7 text-primary" />
-                </div>
+                </motion.div>
 
                 <div className="flex-1" />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
