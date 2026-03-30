@@ -1,13 +1,25 @@
 import { Button } from "@/components/ui/button";
 import logoWhite from "@/assets/logo-white.png";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background grid pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(210,100%,56%,0.08),transparent_70%)]" />
+      {/* Background image */}
+      <img
+        src={heroBg}
+        alt=""
+        width={1920}
+        height={1080}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-background/80" />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background" />
+      {/* Grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage: `
             linear-gradient(hsl(210 100% 56% / 0.3) 1px, transparent 1px),
@@ -16,8 +28,6 @@ const HeroSection = () => {
           backgroundSize: "60px 60px",
         }}
       />
-      {/* Radial glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <img
