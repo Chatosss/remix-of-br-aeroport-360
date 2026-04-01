@@ -106,7 +106,7 @@ const PricingSection = () => {
                 <div className="flex items-center gap-2 mb-1">
                   <h3 className="text-lg font-bold text-foreground">{p.name}</h3>
                   {p.discount && (
-                    <Badge variant="outline" className="text-brand-yellow border-brand-yellow/40 text-[10px]">
+                    <Badge variant="outline" className="text-brand-navy border-brand-navy/40 text-[10px]">
                       {p.discount}
                     </Badge>
                   )}
@@ -125,7 +125,7 @@ const PricingSection = () => {
                 <p className="text-xs text-muted-foreground mb-2">{p.detail}</p>
               )}
               {p.extra && (
-                <p className="text-xs text-brand-yellow/80 mb-4 leading-relaxed">{p.extra}</p>
+                <p className="text-xs text-brand-green mb-4 leading-relaxed">{p.extra}</p>
               )}
 
               <div className="mt-auto pt-6">
@@ -152,7 +152,7 @@ const PricingSection = () => {
         >
           <p className="text-sm text-muted-foreground leading-relaxed">
             O custo de um embargo por erro pode custar{" "}
-            <span className="text-brand-yellow font-semibold">50x o valor desta assinatura</span>.
+            <span className="text-brand-red font-semibold">50x o valor desta assinatura</span>.
             O BR AEROPORT 360 é o seu seguro contra falhas humanas.{" "}
             <span className="text-foreground/60">Condições exclusivas para V1.0.</span>
           </p>

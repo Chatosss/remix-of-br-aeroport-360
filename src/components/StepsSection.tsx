@@ -34,7 +34,7 @@ const StepsSection = () => {
           transition={{ duration: 0.6 }}
         >
           Da inserção de dados ao relatório final em{" "}
-          <span className="gradient-text">3 passos simples</span>
+          <span className="border-b-2 border-brand-yellow">3 passos simples</span>
         </motion.h2>
 
         <div className="relative">
@@ -72,7 +72,7 @@ const StepsSection = () => {
                   transition={{ type: "spring", stiffness: 200, delay: i * 0.15 + 0.2 }}
                   whileHover={{ scale: 1.15 }}
                 >
-                  <s.icon className="w-7 h-7 text-brand-yellow" />
+                  <s.icon className="w-7 h-7 text-brand-navy" />
                 </motion.div>
 
                 <div className="flex-1" />

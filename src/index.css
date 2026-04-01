@@ -75,10 +75,6 @@ html {
     @apply bg-white/60 backdrop-blur-xl border border-white/50 shadow-lg shadow-black/5;
   }
   
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(45,100%,49%)] to-[hsl(48,100%,50%)];
-  }
-
   .gradient-text-navy {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(240,98%,40%)] to-[hsl(210,100%,56%)];
   }

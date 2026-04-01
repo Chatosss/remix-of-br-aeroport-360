@@ -52,9 +52,9 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               O seu projeto ao redor do aeroporto é um{" "}
-              <span className="text-brand-yellow">obstáculo</span>?{" "}
+               <span className="text-brand-red">obstáculo</span>?{" "}
               Descubra em{" "}
-              <span className="text-brand-yellow">milissegundos</span>.
+              <span className="border-b-2 border-brand-yellow">milissegundos</span>.
             </motion.h1>
 
             <motion.p

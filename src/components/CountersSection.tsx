@@ -26,7 +26,7 @@ function AnimatedNumber({ value, prefix, suffix, decimals = 0, inView }: { value
   }, [inView, value]);
 
   return (
-    <span className="text-4xl md:text-5xl font-black text-brand-yellow">
+    <span className="text-4xl md:text-5xl font-black text-brand-navy">
       {prefix}{decimals > 0 ? display.toFixed(decimals) : Math.round(display).toLocaleString("pt-BR")}{suffix}
     </span>
   );
@@ -49,7 +49,7 @@ const CountersSection = () => {
               viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
             >
-              <c.icon className="w-8 h-8 text-brand-yellow mx-auto mb-3" />
+              <c.icon className="w-8 h-8 text-brand-navy mx-auto mb-3" />
               <AnimatedNumber
                 value={c.value}
                 prefix={c.prefix}
