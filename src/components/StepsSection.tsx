@@ -30,7 +30,7 @@ const StepsSection = () => {
           className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
           Da inserção de dados ao relatório final em{" "}
@@ -49,7 +49,7 @@ const StepsSection = () => {
                 }`}
                 initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
               >
                 <div className="flex-1 rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-lg p-6 shadow-lg shadow-brand-navy/5">
@@ -68,7 +68,7 @@ const StepsSection = () => {
                   className="relative z-10 w-16 h-16 rounded-full bg-brand-navy/15 border-2 border-brand-navy flex items-center justify-center shrink-0"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  viewport={{ once: true, margin: "-80px" }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ type: "spring", stiffness: 200, delay: i * 0.15 + 0.2 }}
                   whileHover={{ scale: 1.15 }}
                 >

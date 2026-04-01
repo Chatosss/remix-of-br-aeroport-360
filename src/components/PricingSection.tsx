@@ -47,7 +47,7 @@ const PricingSection = () => {
           className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
           Escolha o plano que acompanha o ritmo dos seus projetos
@@ -56,7 +56,7 @@ const PricingSection = () => {
           className="text-center text-muted-foreground mb-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           Licenciamento completo com todas as funcionalidades inclusas.
@@ -66,7 +66,7 @@ const PricingSection = () => {
           className="flex items-center justify-center gap-3 mb-14"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <span className="text-sm text-muted-foreground">Mensal</span>
@@ -85,7 +85,7 @@ const PricingSection = () => {
               }`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.12 }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
@@ -93,7 +93,7 @@ const PricingSection = () => {
                 <motion.div
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ type: "spring", stiffness: 300, delay: 0.4 }}
                 >
                   <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-red text-foreground px-4 py-1 text-xs font-bold border-0">
@@ -147,7 +147,7 @@ const PricingSection = () => {
           className="mt-14 glass-card rounded-2xl p-8 text-center max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <p className="text-sm text-muted-foreground leading-relaxed">
