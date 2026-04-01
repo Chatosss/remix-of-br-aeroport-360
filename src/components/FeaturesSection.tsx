@@ -24,7 +24,7 @@ const FeaturesSection = () => {
     <section className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground"
+          className="text-3xl md:text-4xl font-bold text-center mb-4 text-brand-navy"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
@@ -46,7 +46,7 @@ const FeaturesSection = () => {
           {features.map((f, i) => (
             <motion.div
               key={f.title}
-              className="rounded-2xl p-8 border border-foreground/10 bg-foreground/5 backdrop-blur-lg shadow-lg shadow-brand-navy/5 hover:border-brand-navy/40 transition-all duration-300 group hover:-translate-y-1"
+              className="rounded-2xl p-8 border border-white/50 bg-white/60 backdrop-blur-lg shadow-lg shadow-black/5 hover:border-brand-navy/40 transition-all duration-300 group hover:-translate-y-1"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}

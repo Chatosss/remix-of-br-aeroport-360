@@ -18,15 +18,15 @@ const HeroSection = () => {
         animate={{ scale: 1 }}
         transition={{ duration: 8, ease: "easeOut" }}
       />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-background/60" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
+      {/* Light overlay */}
+      <div className="absolute inset-0 bg-white/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-background" />
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage: `
-            linear-gradient(hsl(240 98% 27% / 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(240 98% 27% / 0.3) 1px, transparent 1px)
+            linear-gradient(hsl(240 98% 27% / 0.2) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(240 98% 27% / 0.2) 1px, transparent 1px)
           `,
           backgroundSize: "60px 60px",
         }}
@@ -46,7 +46,7 @@ const HeroSection = () => {
           {/* Left Column - Text & CTA */}
           <div>
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black leading-tight tracking-tight text-foreground mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black leading-tight tracking-tight text-brand-navy mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -58,7 +58,7 @@ const HeroSection = () => {
             </motion.h1>
 
             <motion.p
-              className="text-base md:text-lg text-foreground/70 leading-relaxed mb-8"
+              className="text-base md:text-lg text-foreground/80 leading-relaxed mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -76,7 +76,7 @@ const HeroSection = () => {
             >
               <Button
                 size="lg"
-                className="h-14 px-10 text-base font-bold rounded-xl bg-brand-green hover:bg-brand-green-light text-foreground shadow-[0_0_30px_hsl(155,100%,18%,0.3)] hover:shadow-[0_0_40px_hsl(155,100%,18%,0.5)] hover:scale-105 transition-all duration-300"
+                className="h-14 px-10 text-base font-bold rounded-xl bg-brand-green hover:bg-brand-green-light text-white shadow-[0_0_30px_hsl(155,100%,18%,0.25)] hover:shadow-[0_0_40px_hsl(155,100%,18%,0.4)] hover:scale-105 transition-all duration-300"
               >
                 [ Conhecer a plataforma ]
               </Button>
@@ -94,7 +94,7 @@ const HeroSection = () => {
 
           {/* Right Column - Video Placeholder */}
           <motion.div
-            className="rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-lg shadow-2xl shadow-brand-navy/20 aspect-video relative group cursor-pointer overflow-hidden"
+            className="rounded-2xl border border-white/50 bg-white/60 backdrop-blur-lg shadow-lg shadow-black/5 aspect-video relative group cursor-pointer overflow-hidden"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1.0 }}
@@ -103,20 +103,20 @@ const HeroSection = () => {
             <img
               src={heroBg}
               alt="Vídeo de apresentação"
-              className="absolute inset-0 w-full h-full object-cover opacity-30"
+              className="absolute inset-0 w-full h-full object-cover opacity-40"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/20 to-transparent" />
             <div className="absolute inset-0 flex items-center justify-center">
               <motion.div
-                className="w-20 h-20 rounded-full bg-brand-red/90 flex items-center justify-center shadow-[0_0_40px_hsl(0,100%,23%,0.4)] group-hover:bg-brand-red transition-colors"
+                className="w-20 h-20 rounded-full bg-brand-red flex items-center justify-center shadow-[0_0_40px_hsl(0,100%,23%,0.3)] group-hover:bg-brand-red/90 transition-colors"
                 whileHover={{ scale: 1.15 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Play className="w-8 h-8 text-foreground ml-1" />
+                <Play className="w-8 h-8 text-white ml-1" />
               </motion.div>
             </div>
             <div className="absolute bottom-4 left-0 right-0 text-center">
-              <p className="text-sm text-foreground/80 font-medium">
+              <p className="text-sm text-foreground/70 font-medium">
                 Assista à demonstração da plataforma
               </p>
             </div>
