@@ -27,7 +27,7 @@ const StepsSection = () => {
     <section className="py-24 px-6 bg-secondary/30">
       <div className="max-w-5xl mx-auto">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground"
+          className="text-3xl md:text-4xl font-bold text-center mb-16 text-brand-navy"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
