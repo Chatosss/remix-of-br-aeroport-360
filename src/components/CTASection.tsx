@@ -41,7 +41,7 @@ const CTASection = () => {
             >
               <Button
                 size="lg"
-                className="h-14 px-12 text-base font-bold rounded-xl bg-brand-green hover:bg-brand-green-light text-foreground shadow-[0_0_30px_hsl(155,100%,18%,0.3)] hover:shadow-[0_0_40px_hsl(155,100%,18%,0.5)] hover:scale-105 transition-all duration-300"
+                className="h-14 px-12 text-base font-bold rounded-xl bg-brand-green hover:bg-brand-green-light text-white shadow-[0_0_30px_hsl(155,100%,18%,0.25)] hover:shadow-[0_0_40px_hsl(155,100%,18%,0.4)] hover:scale-105 transition-all duration-300"
               >
                 [ Começar Agora ]
               </Button>

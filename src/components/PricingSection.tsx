@@ -132,8 +132,8 @@ const PricingSection = () => {
                 <Button
                   className={`w-full h-12 font-bold rounded-xl transition-all duration-300 hover:scale-[1.03] ${
                     p.featured
-                      ? "bg-brand-red hover:bg-brand-red/90 text-foreground shadow-[0_0_20px_hsl(0,100%,23%,0.3)]"
-                      : "bg-secondary hover:bg-secondary/80 text-secondary-foreground"
+                      ? "bg-brand-red hover:bg-brand-red/90 text-white shadow-[0_0_20px_hsl(0,100%,23%,0.2)]"
+                      : "bg-brand-navy hover:bg-brand-navy/90 text-white"
                   }`}
                 >
                   {p.cta}
