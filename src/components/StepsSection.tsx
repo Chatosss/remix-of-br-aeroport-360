@@ -6,19 +6,19 @@ const steps = [
     icon: Keyboard,
     num: "01",
     title: "Configuração do Aeródromo",
-    text: "Nossa interface intuitiva permite que você configure os parâmetros do seu aeródromo em poucos cliques, sem necessidade de cálculos manuais complexos.",
+    text: "Configure os parâmetros do aeródromo em poucos cliques.",
   },
   {
     icon: Zap,
     num: "02",
-    title: "Processamento Inteligente em Milissegundos",
-    text: "O motor do BR AEROPORT 360 gera a PBZPA e analisa interferências cruzando instantaneamente seus dados com as normas OPEA.",
+    title: "Processamento Inteligente",
+    text: "O motor do sistema cruza instantaneamente seus dados com as normas vigentes.",
   },
   {
     icon: FileText,
     num: "03",
-    title: "Visualização 3D e Diagnóstico",
-    text: "Receba o diagnóstico completo. Visualize a interação em 3D no ambiente real e obtenha a base técnica necessária para a viabilização do seu empreendimento.",
+    title: "Visualização e Diagnóstico",
+    text: "Visualize a interação em 3D no ambiente real e exporte seus relatórios.",
   },
 ];
 
@@ -38,7 +38,6 @@ const StepsSection = () => {
         </motion.h2>
 
         <div className="relative">
-          {/* Vertical line */}
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-border" />
 
           <div className="space-y-16">
@@ -54,7 +53,7 @@ const StepsSection = () => {
                 transition={{ duration: 0.6, delay: i * 0.15 }}
               >
                 <div className="flex-1 text-center md:text-left">
-                  <span className="text-5xl font-black text-primary/20">
+                  <span className="text-5xl font-black text-brand-navy/30">
                     {s.num}
                   </span>
                   <h3 className="text-xl font-bold text-foreground mt-2 mb-3">
@@ -65,16 +64,15 @@ const StepsSection = () => {
                   </p>
                 </div>
 
-                {/* Center node */}
                 <motion.div
-                  className="relative z-10 w-16 h-16 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center shrink-0"
+                  className="relative z-10 w-16 h-16 rounded-full bg-brand-navy/15 border-2 border-brand-navy flex items-center justify-center shrink-0"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ type: "spring", stiffness: 200, delay: i * 0.15 + 0.2 }}
-                  whileHover={{ scale: 1.15, borderColor: "hsl(210 100% 56%)" }}
+                  whileHover={{ scale: 1.15 }}
                 >
-                  <s.icon className="w-7 h-7 text-primary" />
+                  <s.icon className="w-7 h-7 text-brand-yellow" />
                 </motion.div>
 
                 <div className="flex-1" />

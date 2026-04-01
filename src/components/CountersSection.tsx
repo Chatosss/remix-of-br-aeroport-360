@@ -1,0 +1,71 @@
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { BarChart3, Zap, ShieldCheck } from "lucide-react";
+
+const counters = [
+  { icon: BarChart3, value: 5000, prefix: "+", suffix: "", label: "Projetos Analisados" },
+  { icon: Zap, value: 0.5, prefix: "", suffix: " seg", label: "Segundos por Análise", decimals: 1 },
+  { icon: ShieldCheck, value: 100, prefix: "", suffix: "%", label: "Compliance Normativo" },
+];
+
+function AnimatedNumber({ value, prefix, suffix, decimals = 0, inView }: { value: number; prefix: string; suffix: string; decimals?: number; inView: boolean }) {
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const duration = 2000;
+    const steps = 60;
+    const increment = value / steps;
+    let current = 0;
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      current = Math.min(value, increment * step);
+      setDisplay(current);
+      if (step >= steps) clearInterval(timer);
+    }, duration / steps);
+    return () => clearInterval(timer);
+  }, [inView, value]);
+
+  return (
+    <span className="text-4xl md:text-5xl font-black text-brand-yellow">
+      {prefix}{decimals > 0 ? display.toFixed(decimals) : Math.round(display).toLocaleString("pt-BR")}{suffix}
+    </span>
+  );
+}
+
+const CountersSection = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section ref={ref} className="py-16 px-6 bg-brand-navy/20 border-y border-border/30">
+      <div className="max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {counters.map((c, i) => (
+            <motion.div
+              key={c.label}
+              className="text-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.15 }}
+            >
+              <c.icon className="w-8 h-8 text-brand-yellow mx-auto mb-3" />
+              <AnimatedNumber
+                value={c.value}
+                prefix={c.prefix}
+                suffix={c.suffix}
+                decimals={c.decimals}
+                inView={inView}
+              />
+              <p className="mt-2 text-sm text-muted-foreground font-medium">{c.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default CountersSection;
