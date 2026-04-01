@@ -106,7 +106,7 @@ const PricingSection = () => {
                 <div className="flex items-center gap-2 mb-1">
                   <h3 className="text-lg font-bold text-foreground">{p.name}</h3>
                   {p.discount && (
-                    <Badge variant="outline" className="text-brand-yellow border-brand-yellow/40 text-[10px]">
+                    <Badge variant="outline" className="text-brand-navy border-brand-navy/40 text-[10px]">
                       {p.discount}
                     </Badge>
                   )}
