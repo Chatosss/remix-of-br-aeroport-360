@@ -9,7 +9,7 @@ const CTASection = () => {
           className="glass-card rounded-3xl p-12 md:p-16 border-brand-red/20 relative overflow-hidden"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(0,100%,23%,0.06),transparent_70%)]" />
@@ -18,7 +18,7 @@ const CTASection = () => {
               className="text-3xl md:text-4xl font-bold mb-6 text-foreground"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               Pronto para eliminar a incerteza dos seus projetos aeroportuários?
@@ -27,7 +27,7 @@ const CTASection = () => {
               className="text-muted-foreground mb-10 max-w-2xl mx-auto"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               Junte-se aos operadores que já utilizam a tecnologia mais rápida do
@@ -36,7 +36,7 @@ const CTASection = () => {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <Button

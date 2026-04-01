@@ -37,7 +37,7 @@ const FAQSection = () => {
           className="text-3xl md:text-4xl font-bold text-center mb-14 text-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
           FAQ Técnico
@@ -49,7 +49,7 @@ const FAQSection = () => {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
               <AccordionItem

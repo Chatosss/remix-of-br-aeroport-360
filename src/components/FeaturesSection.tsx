@@ -27,7 +27,7 @@ const FeaturesSection = () => {
           className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
           Os 3 Pilares
@@ -36,7 +36,7 @@ const FeaturesSection = () => {
           className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           Tecnologia de ponta aplicada à engenharia aeroportuária
@@ -49,7 +49,7 @@ const FeaturesSection = () => {
               className="rounded-2xl p-8 border border-foreground/10 bg-foreground/5 backdrop-blur-lg shadow-lg shadow-brand-navy/5 hover:border-brand-navy/40 transition-all duration-300 group hover:-translate-y-1"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
             >
