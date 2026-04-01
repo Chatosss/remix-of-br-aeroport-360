@@ -52,7 +52,7 @@ const StepsSection = () => {
                 viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
               >
-                <div className="flex-1 rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-lg p-6 shadow-lg shadow-brand-navy/5">
+                <div className="flex-1 rounded-2xl border border-white/50 bg-white/60 backdrop-blur-lg p-6 shadow-lg shadow-black/5">
                   <span className="text-5xl font-black text-brand-navy/30">
                     {s.num}
                   </span>
