@@ -125,7 +125,7 @@ const PricingSection = () => {
                 <p className="text-xs text-muted-foreground mb-2">{p.detail}</p>
               )}
               {p.extra && (
-                <p className="text-xs text-brand-yellow/80 mb-4 leading-relaxed">{p.extra}</p>
+                <p className="text-xs text-brand-green mb-4 leading-relaxed">{p.extra}</p>
               )}
 
               <div className="mt-auto pt-6">
