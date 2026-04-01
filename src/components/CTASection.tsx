@@ -15,7 +15,7 @@ const CTASection = () => {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(0,100%,23%,0.06),transparent_70%)]" />
           <div className="relative z-10">
             <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-6 text-foreground"
+              className="text-3xl md:text-4xl font-bold mb-6 text-brand-navy"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
