@@ -58,7 +58,7 @@ const FeaturesSection = () => {
                 whileHover={{ rotate: 5, scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <f.icon className="w-7 h-7 text-brand-yellow" />
+                <f.icon className="w-7 h-7 text-brand-navy" />
               </motion.div>
               <h3 className="text-xl font-bold mb-4 text-foreground">
                 {f.title}

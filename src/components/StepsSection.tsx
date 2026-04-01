@@ -34,7 +34,7 @@ const StepsSection = () => {
           transition={{ duration: 0.6 }}
         >
           Da inserção de dados ao relatório final em{" "}
-          <span className="gradient-text">3 passos simples</span>
+          <span className="border-b-2 border-brand-yellow">3 passos simples</span>
         </motion.h2>
 
         <div className="relative">

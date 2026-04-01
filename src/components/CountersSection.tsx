@@ -49,7 +49,7 @@ const CountersSection = () => {
               viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
             >
-              <c.icon className="w-8 h-8 text-brand-yellow mx-auto mb-3" />
+              <c.icon className="w-8 h-8 text-brand-navy mx-auto mb-3" />
               <AnimatedNumber
                 value={c.value}
                 prefix={c.prefix}

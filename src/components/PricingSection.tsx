@@ -152,7 +152,7 @@ const PricingSection = () => {
         >
           <p className="text-sm text-muted-foreground leading-relaxed">
             O custo de um embargo por erro pode custar{" "}
-            <span className="text-brand-yellow font-semibold">50x o valor desta assinatura</span>.
+            <span className="text-brand-red font-semibold">50x o valor desta assinatura</span>.
             O BR AEROPORT 360 é o seu seguro contra falhas humanas.{" "}
             <span className="text-foreground/60">Condições exclusivas para V1.0.</span>
           </p>
