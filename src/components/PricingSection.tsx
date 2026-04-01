@@ -78,10 +78,10 @@ const PricingSection = () => {
           {plans.map((p, i) => (
             <motion.div
               key={p.name}
-              className={`relative rounded-2xl p-8 flex flex-col transition-all duration-300 ${
+              className={`relative rounded-2xl p-8 flex flex-col transition-all duration-300 border backdrop-blur-lg ${
                 p.featured
-                  ? "glass-card border-brand-red/60 shadow-[0_0_40px_hsl(0,100%,23%,0.15)] scale-[1.03] md:scale-105 ring-1 ring-brand-yellow/30"
-                  : "glass-card hover:border-brand-navy/40"
+                  ? "border-brand-red/60 bg-foreground/10 shadow-[0_0_40px_hsl(0,100%,23%,0.15)] scale-[1.03] md:scale-105 ring-1 ring-brand-yellow/30"
+                  : "border-foreground/10 bg-foreground/5 hover:border-brand-navy/40"
               }`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
