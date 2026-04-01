@@ -16,12 +16,10 @@ function AnimatedNumber({ value, prefix, suffix, decimals = 0, inView }: { value
     const duration = 2000;
     const steps = 60;
     const increment = value / steps;
-    let current = 0;
     let step = 0;
     const timer = setInterval(() => {
       step++;
-      current = Math.min(value, increment * step);
-      setDisplay(current);
+      setDisplay(Math.min(value, increment * step));
       if (step >= steps) clearInterval(timer);
     }, duration / steps);
     return () => clearInterval(timer);
@@ -39,13 +37,13 @@ const CountersSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-16 px-6 bg-brand-navy/20 border-y border-border/30">
+    <section ref={ref} className="py-16 px-6 relative">
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {counters.map((c, i) => (
             <motion.div
               key={c.label}
-              className="text-center"
+              className="text-center rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-lg p-8 shadow-lg shadow-brand-navy/10"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
