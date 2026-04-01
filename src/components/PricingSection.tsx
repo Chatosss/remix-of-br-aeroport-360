@@ -96,7 +96,7 @@ const PricingSection = () => {
                   viewport={{ once: false, amount: 0.2 }}
                   transition={{ type: "spring", stiffness: 300, delay: 0.4 }}
                 >
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-red text-foreground px-4 py-1 text-xs font-bold border-0">
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-red text-white px-4 py-1 text-xs font-bold border-0">
                     MAIS VANTAJOSO
                   </Badge>
                 </motion.div>
