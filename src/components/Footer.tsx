@@ -17,10 +17,10 @@ const Footer = () => {
           {/* Contact */}
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-foreground mb-4">Contato</h4>
-            <a href="mailto:comercial@braeroport360.com.br" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-brand-yellow transition-colors">
+            <a href="mailto:comercial@braeroport360.com.br" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-brand-navy transition-colors">
               <Mail className="w-4 h-4" /> comercial@braeroport360.com.br
             </a>
-            <a href="https://wa.me/5528992577697" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-brand-yellow transition-colors">
+            <a href="https://wa.me/5528992577697" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-brand-navy transition-colors">
               <Phone className="w-4 h-4" /> (28) 99257-7697
             </a>
             <div className="flex items-start gap-2 text-sm text-muted-foreground">
