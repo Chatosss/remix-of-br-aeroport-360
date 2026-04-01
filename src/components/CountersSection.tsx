@@ -26,7 +26,7 @@ function AnimatedNumber({ value, prefix, suffix, decimals = 0, inView }: { value
   }, [inView, value]);
 
   return (
-    <span className="text-4xl md:text-5xl font-black text-brand-yellow">
+    <span className="text-4xl md:text-5xl font-black text-brand-navy">
       {prefix}{decimals > 0 ? display.toFixed(decimals) : Math.round(display).toLocaleString("pt-BR")}{suffix}
     </span>
   );
