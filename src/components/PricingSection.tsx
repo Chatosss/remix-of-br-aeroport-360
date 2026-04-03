@@ -78,10 +78,10 @@ const PricingSection = () => {
           {plans.map((p, i) => (
             <motion.div
               key={p.name}
-              className={`relative rounded-2xl p-8 flex flex-col transition-all duration-300 border backdrop-blur-lg ${
+              className={`relative rounded-2xl p-8 flex flex-col transition-all duration-300 backdrop-blur-xl ${
                 p.featured
-                  ? "border-brand-red/40 bg-white/70 shadow-[0_0_40px_hsl(0,100%,23%,0.1)] scale-[1.03] md:scale-105 ring-1 ring-brand-yellow/30"
-                  : "border-white/50 bg-white/60 shadow-lg shadow-black/5 hover:border-brand-navy/40"
+                  ? "bg-white/[0.1] border border-brand-red/30 shadow-[0_0_40px_hsl(0,100%,23%,0.15)] scale-[1.03] md:scale-105 ring-1 ring-brand-yellow/20"
+                  : "glass-card glass-card-hover"
               }`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -96,7 +96,7 @@ const PricingSection = () => {
                   viewport={{ once: false, amount: 0.2 }}
                   transition={{ type: "spring", stiffness: 300, delay: 0.4 }}
                 >
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-red text-white px-4 py-1 text-xs font-bold border-0">
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-red text-foreground px-4 py-1 text-xs font-bold border-0">
                     MAIS VANTAJOSO
                   </Badge>
                 </motion.div>
@@ -132,8 +132,8 @@ const PricingSection = () => {
                 <Button
                   className={`w-full h-12 font-bold rounded-xl transition-all duration-300 hover:scale-[1.03] ${
                     p.featured
-                      ? "bg-brand-red hover:bg-brand-red/90 text-white shadow-[0_0_20px_hsl(0,100%,23%,0.2)]"
-                      : "bg-brand-navy hover:bg-brand-navy/90 text-white"
+                      ? "bg-brand-red hover:bg-brand-red/90 text-foreground shadow-[0_0_20px_hsl(0,100%,23%,0.3)]"
+                      : "bg-brand-navy hover:bg-brand-navy/90 text-foreground"
                   }`}
                 >
                   {p.cta}

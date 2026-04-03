@@ -46,7 +46,7 @@ const FeaturesSection = () => {
           {features.map((f, i) => (
             <motion.div
               key={f.title}
-              className="rounded-2xl p-8 border border-white/50 bg-white/60 backdrop-blur-lg shadow-lg shadow-black/5 hover:border-brand-navy/40 transition-all duration-300 group hover:-translate-y-1"
+              className="glass-card glass-card-hover rounded-2xl p-8 group hover:-translate-y-1"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
@@ -54,7 +54,7 @@ const FeaturesSection = () => {
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
             >
               <motion.div
-                className="w-14 h-14 rounded-xl bg-brand-navy/15 flex items-center justify-center mb-6 group-hover:bg-brand-navy/25 transition-colors"
+                className="w-14 h-14 rounded-xl bg-brand-navy/20 flex items-center justify-center mb-6 group-hover:bg-brand-navy/30 transition-colors"
                 whileHover={{ rotate: 5, scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >

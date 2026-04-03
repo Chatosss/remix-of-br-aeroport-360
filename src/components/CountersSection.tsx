@@ -43,7 +43,7 @@ const CountersSection = () => {
           {counters.map((c, i) => (
             <motion.div
               key={c.label}
-              className="text-center rounded-2xl border border-white/50 bg-white/60 backdrop-blur-lg p-8 shadow-lg shadow-black/5"
+              className="text-center glass-card rounded-2xl p-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
