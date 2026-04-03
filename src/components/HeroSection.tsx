@@ -36,7 +36,7 @@ const HeroSection = () => {
         <motion.img
           src={logoColor}
           alt="BR AEROPORT 360"
-          className="h-20 md:h-28 mb-12"
+          className="h-12 md:h-16 mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
