@@ -31,7 +31,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-24 px-6 bg-secondary/30">
+    <section className="py-24 px-6 bg-white/[0.02]">
       <div className="max-w-3xl mx-auto">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-14 text-brand-navy"
@@ -54,7 +54,7 @@ const FAQSection = () => {
             >
               <AccordionItem
                 value={`faq-${i}`}
-                className="glass-card rounded-xl px-6 border-border/50"
+                className="glass-card rounded-xl px-6 border-white/[0.1]"
               >
                 <AccordionTrigger className="text-foreground text-left font-semibold hover:no-underline">
                   {f.q}
