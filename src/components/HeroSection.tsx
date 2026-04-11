@@ -32,7 +32,7 @@ const HeroSection = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-44 pb-24 flex flex-col items-center text-center gap-8">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-44 pb-40 flex flex-col items-center text-center gap-8">
         {/* 1 - Trust Badge */}
         <motion.div
           className="flex items-center gap-3 rounded-full border border-white/10 bg-zinc-900/60 backdrop-blur-sm px-4 py-2"
@@ -131,6 +131,9 @@ const HeroSection = () => {
           </Button>
         </motion.div>
       </div>
+
+      {/* Bottom fade gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-black/50 pointer-events-none" />
     </section>
   );
 };
