@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <motion.header
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-50"
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-auto"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
