@@ -25,10 +25,10 @@ const HeroSection = () => {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-zinc-950/85 to-zinc-950" />
 
-      {/* Ambient glow behind title */}
+      {/* Ambient glow behind title - subtle */}
       <div
-        className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[700px] rounded-full opacity-40 blur-[100px] pointer-events-none"
-        style={{ background: "radial-gradient(circle, #000287 0%, #005E37 50%, transparent 80%)" }}
+        className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full opacity-20 blur-[100px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, #000287 0%, transparent 70%)" }}
       />
 
       {/* Content */}
