@@ -38,12 +38,12 @@ const CountersSection = () => {
 
   return (
     <section ref={ref} className="py-16 px-6 bg-white relative">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto relative z-10 -mt-28">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {counters.map((c, i) => (
             <motion.div
               key={c.label}
-              className="text-center bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-lg shadow-gray-200/30 rounded-2xl p-8"
+              className="text-center bg-white backdrop-blur-xl border border-gray-200/60 shadow-2xl shadow-black/10 rounded-2xl p-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
