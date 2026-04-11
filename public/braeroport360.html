@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BR AEROPORT 360 | Análise de Obstáculos e PBZPA em Milissegundos</title>
+  <meta name="description" content="Ferramenta SaaS essencial para análise de obstáculos aeroportuários, geração de PBZPA e estudos aeronáuticos com integração Google Earth 3D." />
+  <meta property="og:title" content="BR AEROPORT 360" />
+  <meta property="og:description" content="Análise de obstáculos aeroportuários e PBZPA em milissegundos." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nirmala UI', 'Inter', system-ui, -apple-system, sans-serif;
+      background: hsl(220, 20%, 10%);
+      color: hsl(210, 20%, 95%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Brand Colors ── */
+    :root {
+      --brand-navy: hsl(240, 98%, 65%);
+      --brand-yellow: hsl(45, 100%, 49%);
+      --brand-green: hsl(155, 100%, 35%);
+      --brand-green-light: hsl(153, 97%, 40%);
+      --brand-red: hsl(0, 100%, 23%);
+      --brand-graphite: hsl(240, 2%, 38%);
+    }
+
+    /* ── Utility ── */
+    .container { max-width: 1152px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .container-sm { max-width: 768px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .container-md { max-width: 896px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .container-lg { max-width: 1024px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .text-center { text-align: center; }
+    .relative { position: relative; }
+
+    /* ── NAVBAR ── */
+    .navbar-wrapper {
+      position: fixed; top: 1.5rem; left: 0; right: 0;
+      display: flex; justify-content: center; z-index: 100;
+      pointer-events: none; width: 100%;
+    }
+    .navbar-pill {
+      pointer-events: auto;
+      display: flex; align-items: center; justify-content: center; gap: 2rem;
+      background: rgba(24, 24, 27, 0.8);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 9999px; padding: 1rem 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+    .navbar-logo { height: 2rem; width: auto; flex-shrink: 0; }
+    .navbar-links { display: none; align-items: center; gap: 1.5rem; }
+    .navbar-link {
+      border-radius: 9999px; padding: 0.5rem 1rem;
+      font-size: 1rem; font-weight: 500; color: #a1a1aa;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .navbar-link:hover { background: rgba(255,255,255,0.05); color: #fff; }
+    .navbar-cta {
+      border-radius: 9999px; background: var(--brand-green);
+      padding: 0.625rem 1.5rem; font-size: 0.875rem; font-weight: 700;
+      color: #fff; text-decoration: none; transition: all 0.3s;
+    }
+    .navbar-cta:hover { background: var(--brand-green-light); }
+    @media (min-width: 768px) { .navbar-links { display: flex; } }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(9,9,11,0.85), hsl(220,20%,4%));
+    }
+    .hero-glow {
+      position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%);
+      width: 800px; height: 600px; border-radius: 50%; opacity: 0.2;
+      filter: blur(100px); pointer-events: none;
+      background: radial-gradient(circle, #000287 0%, transparent 70%);
+    }
+    .hero-content {
+      position: relative; z-index: 10;
+      max-width: 64rem; margin: 0 auto; padding: 11rem 1.5rem 10rem;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2rem;
+    }
+    .hero-badge {
+      display: flex; align-items: center; gap: 0.75rem;
+      border-radius: 9999px; border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(24,24,27,0.6); backdrop-filter: blur(4px);
+      padding: 0.5rem 1rem;
+    }
+    .avatar-group { display: flex; margin-left: -0.25rem; }
+    .avatar {
+      width: 1.75rem; height: 1.75rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: #fff;
+      border: 2px solid hsl(220,20%,10%); margin-left: -0.5rem;
+    }
+    .avatar:first-child { margin-left: 0; }
+    .hero-badge-text { font-size: 0.75rem; font-weight: 500; color: #a1a1aa; }
+    .hero-title {
+      font-size: clamp(1.875rem, 5vw, 3.75rem);
+      font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; color: #fff;
+    }
+    .hero-title .highlight {
+      color: var(--brand-yellow);
+      filter: drop-shadow(0 0 18px rgba(252,193,0,0.55));
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: #a1a1aa; line-height: 1.7; max-width: 48rem; margin: 0 auto;
+    }
+    .hero-video {
+      width: 100%; max-width: 56rem; border-radius: 1rem;
+      aspect-ratio: 16/9; position: relative; cursor: pointer; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(24,24,27,0.4);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .hero-video img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25;
+    }
+    .hero-video .play-btn {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 4rem; height: 4rem; border-radius: 50%;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-video .play-btn svg { width: 1.5rem; height: 1.5rem; fill: #fff; color: #fff; margin-left: 2px; }
+    .hero-video .video-label {
+      position: absolute; bottom: 1rem; left: 0; right: 0; text-align: center;
+      font-size: 0.75rem; color: #71717a; font-weight: 500;
+    }
+    .hero-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    .btn-primary {
+      height: 3rem; padding: 0 2rem; font-size: 0.875rem; font-weight: 700;
+      border-radius: 9999px; background: var(--brand-green); color: #fff;
+      border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
+      box-shadow: 0 0 20px rgba(0,94,55,0.4); transition: all 0.3s;
+    }
+    .btn-primary:hover { box-shadow: 0 0 35px rgba(0,94,55,0.6); transform: scale(1.05); }
+    .btn-outline {
+      height: 3rem; padding: 0 2rem; font-size: 0.875rem; font-weight: 700;
+      border-radius: 9999px; background: transparent; color: #d4d4d8;
+      border: 1px solid rgba(255,255,255,0.2); cursor: pointer;
+      display: inline-flex; align-items: center; transition: all 0.3s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
+    .hero-fade {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 8rem;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.5));
+      pointer-events: none;
+    }
+
+    /* ── COUNTERS ── */
+    .counters-section { padding: 4rem 1.5rem; background: #fff; position: relative; }
+    .counters-grid {
+      max-width: 64rem; margin: 0 auto; position: relative; z-index: 10; margin-top: -7rem;
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+    }
+    @media (min-width: 768px) { .counters-grid { grid-template-columns: repeat(3, 1fr); } }
+    .counter-card {
+      text-align: center; background: #fff;
+      backdrop-filter: blur(16px); border: 1px solid rgba(229,231,235,0.6);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1);
+      border-radius: 1rem; padding: 2rem;
+    }
+    .counter-icon { width: 2rem; height: 2rem; color: var(--brand-navy); margin: 0 auto 0.75rem; }
+    .counter-value { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: var(--brand-navy); }
+    .counter-label { margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280; font-weight: 500; }
+
+    /* ── FEATURES (3 Pilares) ── */
+    .features-section { padding: 6rem 1.5rem; background: #f9fafb; }
+    .section-title { font-size: clamp(1.875rem, 3vw, 2.25rem); font-weight: 700; color: var(--brand-navy); margin-bottom: 1rem; }
+    .section-subtitle { color: #6b7280; margin-bottom: 4rem; max-width: 42rem; margin-left: auto; margin-right: auto; }
+    .features-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 768px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+    .feature-card {
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(16px);
+      border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 10px 25px rgba(229,231,235,0.3);
+      border-radius: 1rem; padding: 2rem; transition: all 0.3s;
+    }
+    .feature-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.9); border-color: rgba(209,213,219,0.6); }
+    .feature-icon-box {
+      width: 3.5rem; height: 3.5rem; border-radius: 0.75rem;
+      background: rgba(76,73,237,0.1); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem; transition: background 0.3s;
+    }
+    .feature-card:hover .feature-icon-box { background: rgba(76,73,237,0.2); }
+    .feature-icon-box svg { width: 1.75rem; height: 1.75rem; color: var(--brand-navy); }
+    .feature-card h3 { font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem; }
+    .feature-card p { font-size: 0.875rem; color: #6b7280; line-height: 1.7; }
+
+    /* ── STEPS ── */
+    .steps-section { padding: 6rem 1.5rem; background: #f9fafb; }
+    .steps-title { font-size: clamp(1.875rem, 3vw, 2.25rem); font-weight: 700; color: var(--brand-navy); margin-bottom: 4rem; }
+    .steps-title .underline-yellow { border-bottom: 2px solid var(--brand-yellow); }
+    .steps-container { position: relative; }
+    .steps-line { display: none; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: #e5e7eb; }
+    @media (min-width: 768px) { .steps-line { display: block; } }
+    .step-row {
+      display: flex; flex-direction: column; align-items: center; gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    @media (min-width: 768px) { .step-row { flex-direction: row; } }
+    .step-row.reverse { }
+    @media (min-width: 768px) { .step-row.reverse { flex-direction: row-reverse; } }
+    .step-content {
+      flex: 1; background: rgba(255,255,255,0.7); backdrop-filter: blur(16px);
+      border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 10px 25px rgba(229,231,235,0.3);
+      border-radius: 1rem; padding: 1.5rem;
+    }
+    .step-num { font-size: 3rem; font-weight: 900; color: rgba(76,73,237,0.2); }
+    .step-content h3 { font-size: 1.25rem; font-weight: 700; color: #1f2937; margin: 0.5rem 0 0.75rem; }
+    .step-content p { font-size: 0.875rem; color: #6b7280; line-height: 1.7; }
+    .step-icon-circle {
+      position: relative; z-index: 10; flex-shrink: 0;
+      width: 4rem; height: 4rem; border-radius: 50%;
+      background: rgba(76,73,237,0.1); border: 2px solid rgba(76,73,237,0.3);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .step-icon-circle svg { width: 1.75rem; height: 1.75rem; color: var(--brand-navy); }
+    .step-spacer { flex: 1; }
+
+    /* ── PRICING ── */
+    .pricing-section { padding: 6rem 1.5rem; background: #fff; }
+    .pricing-toggle { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 3.5rem; }
+    .pricing-toggle span { font-size: 0.875rem; color: #6b7280; }
+    .pricing-toggle .active { color: #1f2937; font-weight: 600; }
+    .toggle-switch {
+      width: 44px; height: 24px; border-radius: 9999px; background: #d4d4d8;
+      position: relative; cursor: pointer; transition: background 0.3s;
+    }
+    .toggle-switch.on { background: var(--brand-navy); }
+    .toggle-switch .toggle-knob {
+      width: 20px; height: 20px; border-radius: 50%; background: #fff;
+      position: absolute; top: 2px; left: 2px; transition: transform 0.3s;
+    }
+    .toggle-switch.on .toggle-knob { transform: translateX(20px); }
+    .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: stretch; }
+    @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+    .pricing-card {
+      position: relative; border-radius: 1rem; padding: 2rem;
+      display: flex; flex-direction: column; transition: all 0.3s;
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(16px);
+      border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 10px 25px rgba(229,231,235,0.3);
+    }
+    .pricing-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.9); border-color: rgba(209,213,219,0.6); }
+    .pricing-card.featured {
+      background: #fff; border: 2px solid rgba(118,0,0,0.3);
+      box-shadow: 0 0 40px rgba(118,0,0,0.1); transform: scale(1.03);
+      ring: 1px solid rgba(252,193,0,0.2);
+    }
+    @media (min-width: 768px) { .pricing-card.featured { transform: scale(1.05); } }
+    .pricing-card.featured:hover { transform: scale(1.06); }
+    .pricing-badge-top {
+      position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);
+      background: var(--brand-red); color: #fff; padding: 0.25rem 1rem;
+      border-radius: 9999px; font-size: 0.75rem; font-weight: 700; white-space: nowrap;
+    }
+    .plan-header { margin-bottom: 1.5rem; }
+    .plan-name-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; }
+    .plan-name { font-size: 1.125rem; font-weight: 700; color: #1f2937; }
+    .plan-discount {
+      font-size: 10px; font-weight: 600; color: var(--brand-navy);
+      border: 1px solid rgba(76,73,237,0.4); border-radius: 9999px; padding: 0.125rem 0.5rem;
+    }
+    .plan-subtitle { font-size: 0.75rem; color: #6b7280; }
+    .plan-price { margin-bottom: 0.5rem; }
+    .plan-price .amount { font-size: 2.5rem; font-weight: 900; color: #1f2937; }
+    .plan-price .period { font-size: 0.875rem; color: #6b7280; }
+    .plan-detail { font-size: 0.75rem; color: #6b7280; margin-bottom: 0.5rem; }
+    .plan-extra { font-size: 0.75rem; color: var(--brand-green); margin-bottom: 1rem; line-height: 1.5; }
+    .plan-cta-area { margin-top: auto; padding-top: 1.5rem; }
+    .btn-plan {
+      width: 100%; height: 3rem; font-weight: 700; border-radius: 0.75rem;
+      border: none; cursor: pointer; font-size: 0.875rem; color: #fff;
+      transition: all 0.3s;
+    }
+    .btn-plan.navy { background: var(--brand-navy); }
+    .btn-plan.navy:hover { opacity: 0.9; transform: scale(1.03); }
+    .btn-plan.red { background: var(--brand-red); box-shadow: 0 0 20px rgba(118,0,0,0.3); }
+    .btn-plan.red:hover { opacity: 0.9; transform: scale(1.03); }
+    .pricing-footnote {
+      margin-top: 3.5rem; max-width: 48rem; margin-left: auto; margin-right: auto;
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(16px);
+      border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 10px 25px rgba(229,231,235,0.3);
+      border-radius: 1rem; padding: 2rem; text-align: center;
+    }
+    .pricing-footnote p { font-size: 0.875rem; color: #6b7280; line-height: 1.7; }
+    .pricing-footnote .red-text { color: var(--brand-red); font-weight: 600; }
+    .pricing-footnote .dim { color: #9ca3af; }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 6rem 1.5rem; background: #f9fafb; }
+    .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .faq-item {
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(16px);
+      border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border-radius: 0.75rem; padding: 0 1.5rem; overflow: hidden;
+    }
+    .faq-question {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 0; font-size: 1rem; font-weight: 600; color: #1f2937;
+      text-align: left;
+    }
+    .faq-question .chevron {
+      width: 1rem; height: 1rem; transition: transform 0.3s; flex-shrink: 0; color: #6b7280;
+    }
+    .faq-item.open .faq-question .chevron { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+      color: #6b7280; font-size: 0.875rem; line-height: 1.7;
+    }
+    .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1.25rem; }
+
+    /* ── CTA ── */
+    .cta-section { padding: 6rem 1.5rem; background: #fff; }
+    .cta-card {
+      max-width: 56rem; margin: 0 auto; text-align: center;
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(16px);
+      border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 10px 25px rgba(229,231,235,0.3);
+      border-radius: 1.5rem; padding: 3rem; position: relative; overflow: hidden;
+    }
+    @media (min-width: 768px) { .cta-card { padding: 4rem; } }
+    .cta-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(118,0,0,0.05), transparent 70%);
+    }
+    .cta-inner { position: relative; z-index: 10; }
+    .cta-title { font-size: clamp(1.875rem, 3vw, 2.25rem); font-weight: 700; color: var(--brand-navy); margin-bottom: 1.5rem; }
+    .cta-text { color: #6b7280; margin-bottom: 2.5rem; max-width: 42rem; margin-left: auto; margin-right: auto; }
+    .btn-cta {
+      height: 3.5rem; padding: 0 3rem; font-size: 1rem; font-weight: 700;
+      border-radius: 0.75rem; background: var(--brand-green); color: #fff;
+      border: none; cursor: pointer; display: inline-flex; align-items: center;
+      box-shadow: 0 0 30px rgba(0,94,55,0.3); transition: all 0.3s;
+    }
+    .btn-cta:hover { box-shadow: 0 0 40px rgba(0,94,55,0.5); transform: scale(1.05); background: var(--brand-green-light); }
+
+    /* ── FOOTER ── */
+    .footer { border-top: 1px solid #e5e7eb; background: #f9fafb; padding: 4rem 1.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; margin-bottom: 3rem; }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+    .footer-logo { height: 3.5rem; margin-bottom: 1rem; }
+    .footer-company { font-size: 0.75rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.5; }
+    .footer h4 { font-size: 0.875rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem; }
+    .footer-contact { display: flex; flex-direction: column; gap: 0.75rem; }
+    .footer-contact a, .footer-contact .addr {
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      font-size: 0.875rem; color: #6b7280; text-decoration: none; transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--brand-navy); }
+    .footer-contact svg { width: 1rem; height: 1rem; flex-shrink: 0; margin-top: 0.125rem; }
+    .footer-social { display: flex; gap: 1rem; }
+    .social-btn {
+      width: 2.5rem; height: 2.5rem; border-radius: 0.5rem;
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(16px);
+      border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      display: flex; align-items: center; justify-content: center;
+      color: #6b7280; transition: all 0.2s; text-decoration: none;
+    }
+    .social-btn:hover { color: var(--brand-navy); }
+    .social-btn svg { width: 1.25rem; height: 1.25rem; }
+    .footer-bottom {
+      border-top: 1px solid #e5e7eb; padding-top: 2rem;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: space-between; gap: 1rem;
+    }
+    @media (min-width: 768px) { .footer-bottom { flex-direction: row; } }
+    .footer-bottom .secure { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #6b7280; }
+    .footer-bottom .secure svg { width: 1rem; height: 1rem; color: var(--brand-green); }
+    .footer-bottom .copy { font-size: 0.75rem; color: #6b7280; }
+
+    /* ── SVG Icons (inline via CSS) ── */
+  </style>
+</head>
+<body>
+
+<!-- ═══════ NAVBAR ═══════ -->
+<div class="navbar-wrapper">
+  <nav class="navbar-pill">
+    <a href="#" aria-label="BR AEROPORT 360">
+      <img src="https://leonardopages.com/wp-content/uploads/2026/04/logo-vertical-br-color-scaled.png" alt="BR AEROPORT 360" class="navbar-logo" />
+    </a>
+    <div class="navbar-links">
+      <a href="#funcionalidades" class="navbar-link">Funcionalidades</a>
+      <a href="#como-funciona" class="navbar-link">Como Funciona</a>
+      <a href="#planos" class="navbar-link">Planos</a>
+      <a href="#faq" class="navbar-link">FAQ</a>
+    </div>
+    <a href="#contato" class="navbar-cta">Começar Agora</a>
+  </nav>
+</div>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <img src="https://leonardopages.com/wp-content/uploads/2026/03/hero-bg-C0UKtHim.jpg" alt="" class="hero-bg" />
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <!-- Badge -->
+    <div class="hero-badge">
+      <div class="avatar-group">
+        <div class="avatar" style="background:#2563eb;">RC</div>
+        <div class="avatar" style="background:#059669;">AL</div>
+        <div class="avatar" style="background:#7c3aed;">MF</div>
+        <div class="avatar" style="background:#ea580c;">JS</div>
+        <div class="avatar" style="background:#e11d48;">PT</div>
+      </div>
+      <span class="hero-badge-text">+ de 5.000 projetos analisados</span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="hero-title">
+      O seu projeto ao redor do aeroporto<br/>
+      é um obstáculo? Descubra em <span class="highlight">milissegundos</span>.
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="hero-subtitle">
+      O BR AEROPORT 360 é a ferramenta essencial para quem opera ou constrói
+      no entorno de aeródromos. Análise técnica autônoma, sem necessidade de consultoria externa.
+    </p>
+
+    <!-- Video -->
+    <div class="hero-video">
+      <img src="https://leonardopages.com/wp-content/uploads/2026/03/hero-bg-C0UKtHim.jpg" alt="Vídeo de apresentação" />
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6),transparent,transparent);"></div>
+      <div class="play-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <div class="video-label">Assista à demonstração da plataforma</div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="hero-buttons">
+      <button class="btn-primary">
+        Conhecer a plataforma
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <button class="btn-outline">Ver Demonstração</button>
+    </div>
+  </div>
+
+  <div class="hero-fade"></div>
+</section>
+
+<!-- ═══════ COUNTERS ═══════ -->
+<section class="counters-section">
+  <div class="counters-grid">
+    <div class="counter-card">
+      <svg class="counter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <div class="counter-value" data-target="5000" data-prefix="+" data-suffix="">+0</div>
+      <p class="counter-label">Projetos Analisados</p>
+    </div>
+    <div class="counter-card">
+      <svg class="counter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <div class="counter-value" data-target="0.5" data-prefix="" data-suffix=" seg" data-decimals="1">0.0 seg</div>
+      <p class="counter-label">Segundos por Análise</p>
+    </div>
+    <div class="counter-card">
+      <svg class="counter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      <div class="counter-value" data-target="100" data-prefix="" data-suffix="%">0%</div>
+      <p class="counter-label">Compliance Normativo</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FEATURES ═══════ -->
+<section id="funcionalidades" class="features-section">
+  <div class="container">
+    <h2 class="section-title text-center">Os 3 Pilares</h2>
+    <p class="section-subtitle text-center">Tecnologia de ponta aplicada à engenharia aeroportuária</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Rigor Normativo Automatizado</h3>
+        <p>Esqueça as inconsistências dos cálculos manuais. Algoritmos de alta precisão baseados estritamente nas normas vigentes para PBZPA e OPEA.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Integração com Google Earth</h3>
+        <p>Transforme dados abstratos em decisões visuais. Tecnologia de visualização 3D dos seus projetos diretamente no Google Earth.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-box">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>Estudos Inteligentes</h3>
+        <p>Velocidade é o nosso DNA. Identifique conflitos, receba diagnósticos de viabilidade e elimine gargalos burocráticos em frações de segundo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ STEPS ═══════ -->
+<section id="como-funciona" class="steps-section">
+  <div class="container-lg">
+    <h2 class="steps-title text-center">
+      Da inserção de dados ao relatório final em <span class="underline-yellow">3 passos simples</span>
+    </h2>
+    <div class="steps-container">
+      <div class="steps-line"></div>
+
+      <div class="step-row">
+        <div class="step-content">
+          <span class="step-num">01</span>
+          <h3>Configuração do Aeródromo</h3>
+          <p>Configure os parâmetros do aeródromo em poucos cliques.</p>
+        </div>
+        <div class="step-icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M8 12h.001M12 12h.001M16 12h.001M6 16h12"/></svg>
+        </div>
+        <div class="step-spacer"></div>
+      </div>
+
+      <div class="step-row reverse">
+        <div class="step-content">
+          <span class="step-num">02</span>
+          <h3>Processamento Inteligente</h3>
+          <p>O motor do sistema cruza instantaneamente seus dados com as normas vigentes.</p>
+        </div>
+        <div class="step-icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="step-spacer"></div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-content">
+          <span class="step-num">03</span>
+          <h3>Visualização e Diagnóstico</h3>
+          <p>Visualize a interação em 3D no ambiente real e exporte seus relatórios.</p>
+        </div>
+        <div class="step-icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="step-spacer"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRICING ═══════ -->
+<section id="planos" class="pricing-section">
+  <div class="container">
+    <h2 class="section-title text-center">Escolha o plano que acompanha o ritmo dos seus projetos</h2>
+    <p class="section-subtitle text-center">Licenciamento completo com todas as funcionalidades inclusas.</p>
+
+    <div class="pricing-toggle">
+      <span>Mensal</span>
+      <div class="toggle-switch on" id="pricingToggle" onclick="this.classList.toggle('on')">
+        <div class="toggle-knob"></div>
+      </div>
+      <span class="active">Anual</span>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Mensal -->
+      <div class="pricing-card">
+        <div class="plan-header">
+          <div class="plan-name-row"><span class="plan-name">MENSAL</span></div>
+          <span class="plan-subtitle">Projetos Pontuais</span>
+        </div>
+        <div class="plan-price">
+          <span class="amount">R$ 25.000</span><span class="period">,00 /mês</span>
+        </div>
+        <div class="plan-cta-area">
+          <button class="btn-plan navy">Assinar Plano Mensal</button>
+        </div>
+      </div>
+
+      <!-- Semestral -->
+      <div class="pricing-card">
+        <div class="plan-header">
+          <div class="plan-name-row">
+            <span class="plan-name">SEMESTRAL</span>
+            <span class="plan-discount">-20%</span>
+          </div>
+          <span class="plan-subtitle">Continuidade Técnica</span>
+        </div>
+        <div class="plan-price">
+          <span class="amount">R$ 20.000</span><span class="period">,00 /mês</span>
+        </div>
+        <p class="plan-detail">Parcela única de R$ 120.000,00</p>
+        <div class="plan-cta-area">
+          <button class="btn-plan navy">Assinar Plano Semestral</button>
+        </div>
+      </div>
+
+      <!-- Anual -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge-top">MAIS VANTAJOSO</div>
+        <div class="plan-header">
+          <div class="plan-name-row">
+            <span class="plan-name">ANUAL</span>
+            <span class="plan-discount">-60%</span>
+          </div>
+        </div>
+        <div class="plan-price">
+          <span class="amount">R$ 9.900</span><span class="period">,00 /mês</span>
+        </div>
+        <p class="plan-detail">Pagamento único de R$ 118.800,00</p>
+        <p class="plan-extra">6 meses de bonificação no valor total.</p>
+        <div class="plan-cta-area">
+          <button class="btn-plan red">Garantir Licença Anual</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-footnote">
+      <p>
+        O custo de um embargo por erro pode custar
+        <span class="red-text">50x o valor desta assinatura</span>.
+        O BR AEROPORT 360 é o seu seguro contra falhas humanas.
+        <span class="dim">Condições exclusivas para V1.0.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section id="faq" class="faq-section">
+  <div class="container-sm">
+    <h2 class="section-title text-center" style="margin-bottom:3.5rem;">FAQ Técnico</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          Os cálculos do sistema seguem quais normas?
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Baseado rigorosamente em ICA 11-3, ICA 63-19 e RBAC 154.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          Preciso instalar algum software?
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Não. Sistema 100% Cloud (SaaS).</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          Como funciona a integração 3D?
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Geração de arquivos KML/KMZ compatíveis com Google Earth.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          O software é atualizado?
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Sim, atualizações normativas automáticas inclusas para assinantes ativos.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          Posso exportar relatórios?
+          <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Sim, diagnósticos técnicos detalhados para instrução de processos e viabilidade.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section id="contato" class="cta-section">
+  <div class="cta-card">
+    <div class="cta-glow"></div>
+    <div class="cta-inner">
+      <h2 class="cta-title">Pronto para eliminar a incerteza dos seus projetos aeroportuários?</h2>
+      <p class="cta-text">
+        Junte-se aos operadores que já utilizam a tecnologia mais rápida do
+        Brasil para análise de obstáculos e PBZPA.
+      </p>
+      <button class="btn-cta">[ Começar Agora ]</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="https://leonardopages.com/wp-content/uploads/2026/04/logo-vertical-br-color-scaled.png" alt="BR AEROPORT 360" class="footer-logo" />
+        <p class="footer-company">BR AEROPORT SOLUÇÕES TECNOLÓGICAS E INOVAÇÃO LTDA</p>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <div class="footer-contact">
+          <a href="mailto:comercial@braeroport360.com.br">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            comercial@braeroport360.com.br
+          </a>
+          <a href="https://wa.me/5528992577697">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (28) 99257-7697
+          </a>
+          <div class="addr">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Pref. Osmar Cunha, 416, Sala 1108 - Florianópolis, Centro - CEP: 88015-100, SC.</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4>Redes Sociais</h4>
+        <div class="footer-social">
+          <a href="https://instagram.com/braeroport360" target="_blank" rel="noreferrer" class="social-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://youtube.com/@BRAEROPORT360" target="_blank" rel="noreferrer" class="social-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.13C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
+          <a href="https://linkedin.com/company/braeroport" target="_blank" rel="noreferrer" class="social-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="secure">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Ambiente Seguro. Desenvolvido por especialistas em engenharia aeroportuária para profissionais de alta performance.
+      </div>
+      <p class="copy">&copy; <script>document.write(new Date().getFullYear())</script> BR AEROPORT 360. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════ COUNTER ANIMATION ═══════ -->
+<script>
+(function(){
+  const counters = document.querySelectorAll('.counter-value');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      if (el.dataset.animated) return;
+      el.dataset.animated = '1';
+      const target = parseFloat(el.dataset.target);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const steps = 60;
+      const inc = target / steps;
+      let step = 0;
+      const timer = setInterval(() => {
+        step++;
+        const val = Math.min(target, inc * step);
+        if (decimals > 0) {
+          el.textContent = prefix + val.toFixed(decimals) + suffix;
+        } else {
+          el.textContent = prefix + Math.round(val).toLocaleString('pt-BR') + suffix;
+        }
+        if (step >= steps) clearInterval(timer);
+      }, 2000 / steps);
+    });
+  }, { threshold: 0.2 });
+  counters.forEach(c => observer.observe(c));
+})();
+</script>
+
+</body>
+</html>
