@@ -384,6 +384,65 @@
     .footer-bottom .secure svg { width: 1rem; height: 1rem; color: var(--brand-green); }
     .footer-bottom .copy { font-size: 0.75rem; color: #6b7280; }
 
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Hero animations (play on load) */
+    .hero-badge { opacity: 0; animation: fadeInDown 0.6s 0.2s ease-out forwards; }
+    .hero-title { opacity: 0; animation: fadeInDown 0.7s 0.3s ease-out forwards; }
+    .hero-subtitle { opacity: 0; animation: fadeInDown 0.7s 0.4s ease-out forwards; }
+    .hero-video { opacity: 0; animation: fadeInUp 0.8s 0.5s ease-out forwards; }
+    .hero-video:hover { transform: scale(1.01); }
+    .hero-buttons { opacity: 0; animation: fadeInUp 0.7s 0.6s ease-out forwards; }
+
+    /* Scroll-triggered elements start hidden */
+    .anim-up, .anim-down, .anim-left, .anim-right, .anim-fade, .anim-scale {
+      opacity: 0;
+    }
+    .anim-up.visible { animation: fadeInUp 0.5s ease-out forwards; }
+    .anim-down.visible { animation: fadeInDown 0.5s ease-out forwards; }
+    .anim-left.visible { animation: fadeInLeft 0.5s ease-out forwards; }
+    .anim-right.visible { animation: fadeInRight 0.5s ease-out forwards; }
+    .anim-fade.visible { animation: fadeIn 0.6s ease-out forwards; }
+    .anim-scale.visible { animation: scaleIn 0.5s ease-out forwards; }
+
+    /* Hover effects matching React */
+    .feature-card { transition: transform 0.3s, background 0.3s, border-color 0.3s; }
+    .feature-icon-box { transition: background 0.3s, transform 0.3s; }
+    .feature-card:hover .feature-icon-box { transform: rotate(5deg) scale(1.1); }
+    .counter-card { transition: transform 0.3s, box-shadow 0.3s; }
+    .counter-card:hover { transform: translateY(-4px); }
+    .step-content { transition: transform 0.3s; }
+    .step-content:hover { transform: translateY(-4px); }
+    .pricing-card { transition: transform 0.3s, background 0.3s, border-color 0.3s; }
+    .cta-card { transition: transform 0.3s; }
+    .cta-card:hover { transform: translateY(-4px); }
+    .play-btn { transition: background 0.3s, transform 0.3s; }
+    .hero-video:hover .play-btn { background: rgba(255,255,255,0.15); transform: translate(-50%,-50%) scale(1.1); }
+
     /* ── SVG Icons (inline via CSS) ── */
   </style>
 </head>
@@ -462,17 +521,17 @@
 <!-- ═══════ COUNTERS ═══════ -->
 <section class="counters-section">
   <div class="counters-grid">
-    <div class="counter-card">
+    <div class="counter-card anim-up" style="animation-delay:0s">
       <svg class="counter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       <div class="counter-value" data-target="5000" data-prefix="+" data-suffix="">+0</div>
       <p class="counter-label">Projetos Analisados</p>
     </div>
-    <div class="counter-card">
+    <div class="counter-card anim-up" style="animation-delay:0.15s">
       <svg class="counter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       <div class="counter-value" data-target="0.5" data-prefix="" data-suffix=" seg" data-decimals="1">0.0 seg</div>
       <p class="counter-label">Segundos por Análise</p>
     </div>
-    <div class="counter-card">
+    <div class="counter-card anim-up" style="animation-delay:0.3s">
       <svg class="counter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
       <div class="counter-value" data-target="100" data-prefix="" data-suffix="%">0%</div>
       <p class="counter-label">Compliance Normativo</p>
@@ -483,24 +542,24 @@
 <!-- ═══════ FEATURES ═══════ -->
 <section id="funcionalidades" class="features-section">
   <div class="container">
-    <h2 class="section-title text-center">Os 3 Pilares</h2>
-    <p class="section-subtitle text-center">Tecnologia de ponta aplicada à engenharia aeroportuária</p>
+    <h2 class="section-title text-center anim-up">Os 3 Pilares</h2>
+    <p class="section-subtitle text-center anim-fade" style="animation-delay:0.15s">Tecnologia de ponta aplicada à engenharia aeroportuária</p>
     <div class="features-grid">
-      <div class="feature-card">
+      <div class="feature-card anim-left" style="animation-delay:0s">
         <div class="feature-icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3>Rigor Normativo Automatizado</h3>
         <p>Esqueça as inconsistências dos cálculos manuais. Algoritmos de alta precisão baseados estritamente nas normas vigentes para PBZPA e OPEA.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card anim-up" style="animation-delay:0.15s">
         <div class="feature-icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </div>
         <h3>Integração com Google Earth</h3>
         <p>Transforme dados abstratos em decisões visuais. Tecnologia de visualização 3D dos seus projetos diretamente no Google Earth.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card anim-right" style="animation-delay:0.3s">
         <div class="feature-icon-box">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
@@ -514,13 +573,13 @@
 <!-- ═══════ STEPS ═══════ -->
 <section id="como-funciona" class="steps-section">
   <div class="container-lg">
-    <h2 class="steps-title text-center">
+    <h2 class="steps-title text-center anim-up">
       Da inserção de dados ao relatório final em <span class="underline-yellow">3 passos simples</span>
     </h2>
     <div class="steps-container">
       <div class="steps-line"></div>
 
-      <div class="step-row">
+      <div class="step-row anim-left" style="animation-delay:0s">
         <div class="step-content">
           <span class="step-num">01</span>
           <h3>Configuração do Aeródromo</h3>
@@ -532,7 +591,7 @@
         <div class="step-spacer"></div>
       </div>
 
-      <div class="step-row reverse">
+      <div class="step-row reverse anim-right" style="animation-delay:0.2s">
         <div class="step-content">
           <span class="step-num">02</span>
           <h3>Processamento Inteligente</h3>
@@ -544,7 +603,7 @@
         <div class="step-spacer"></div>
       </div>
 
-      <div class="step-row">
+      <div class="step-row anim-left" style="animation-delay:0.4s">
         <div class="step-content">
           <span class="step-num">03</span>
           <h3>Visualização e Diagnóstico</h3>
@@ -562,8 +621,8 @@
 <!-- ═══════ PRICING ═══════ -->
 <section id="planos" class="pricing-section">
   <div class="container">
-    <h2 class="section-title text-center">Escolha o plano que acompanha o ritmo dos seus projetos</h2>
-    <p class="section-subtitle text-center">Licenciamento completo com todas as funcionalidades inclusas.</p>
+    <h2 class="section-title text-center anim-up">Escolha o plano que acompanha o ritmo dos seus projetos</h2>
+    <p class="section-subtitle text-center anim-fade" style="animation-delay:0.15s">Licenciamento completo com todas as funcionalidades inclusas.</p>
 
     <div class="pricing-toggle">
       <span>Mensal</span>
@@ -575,7 +634,7 @@
 
     <div class="pricing-grid">
       <!-- Mensal -->
-      <div class="pricing-card">
+      <div class="pricing-card anim-up" style="animation-delay:0s">
         <div class="plan-header">
           <div class="plan-name-row"><span class="plan-name">MENSAL</span></div>
           <span class="plan-subtitle">Projetos Pontuais</span>
@@ -589,7 +648,7 @@
       </div>
 
       <!-- Semestral -->
-      <div class="pricing-card">
+      <div class="pricing-card anim-up" style="animation-delay:0.15s">
         <div class="plan-header">
           <div class="plan-name-row">
             <span class="plan-name">SEMESTRAL</span>
@@ -607,7 +666,7 @@
       </div>
 
       <!-- Anual -->
-      <div class="pricing-card featured">
+      <div class="pricing-card featured anim-up" style="animation-delay:0.3s">
         <div class="pricing-badge-top">MAIS VANTAJOSO</div>
         <div class="plan-header">
           <div class="plan-name-row">
@@ -626,7 +685,7 @@
       </div>
     </div>
 
-    <div class="pricing-footnote">
+    <div class="pricing-footnote anim-fade" style="animation-delay:0.4s">
       <p>
         O custo de um embargo por erro pode custar
         <span class="red-text">50x o valor desta assinatura</span>.
@@ -640,37 +699,37 @@
 <!-- ═══════ FAQ ═══════ -->
 <section id="faq" class="faq-section">
   <div class="container-sm">
-    <h2 class="section-title text-center" style="margin-bottom:3.5rem;">FAQ Técnico</h2>
+    <h2 class="section-title text-center anim-up" style="margin-bottom:3.5rem;">FAQ Técnico</h2>
     <div class="faq-list">
-      <div class="faq-item">
+      <div class="faq-item anim-up" style="animation-delay:0s">
         <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
           Os cálculos do sistema seguem quais normas?
           <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="faq-answer">Baseado rigorosamente em ICA 11-3, ICA 63-19 e RBAC 154.</div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item anim-up" style="animation-delay:0.1s">
         <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
           Preciso instalar algum software?
           <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="faq-answer">Não. Sistema 100% Cloud (SaaS).</div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item anim-up" style="animation-delay:0.2s">
         <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
           Como funciona a integração 3D?
           <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="faq-answer">Geração de arquivos KML/KMZ compatíveis com Google Earth.</div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item anim-up" style="animation-delay:0.3s">
         <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
           O software é atualizado?
           <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="faq-answer">Sim, atualizações normativas automáticas inclusas para assinantes ativos.</div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item anim-up" style="animation-delay:0.4s">
         <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
           Posso exportar relatórios?
           <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -683,7 +742,7 @@
 
 <!-- ═══════ CTA ═══════ -->
 <section id="contato" class="cta-section">
-  <div class="cta-card">
+  <div class="cta-card anim-scale">
     <div class="cta-glow"></div>
     <div class="cta-inner">
       <h2 class="cta-title">Pronto para eliminar a incerteza dos seus projetos aeroportuários?</h2>
@@ -776,6 +835,21 @@
     });
   }, { threshold: 0.2 });
   counters.forEach(c => observer.observe(c));
+})();
+</script>
+
+<!-- ═══════ SCROLL ANIMATIONS ═══════ -->
+<script>
+(function(){
+  var animEls = document.querySelectorAll('.anim-up, .anim-down, .anim-left, .anim-right, .anim-fade, .anim-scale');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  animEls.forEach(function(el) { observer.observe(el); });
 })();
 </script>
 
