@@ -41,7 +41,7 @@ const PricingSection = () => {
   const [annual, setAnnual] = useState(true);
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-4 text-brand-navy"
@@ -53,7 +53,7 @@ const PricingSection = () => {
           Escolha o plano que acompanha o ritmo dos seus projetos
         </motion.h2>
         <motion.p
-          className="text-center text-muted-foreground mb-10"
+          className="text-center text-gray-500 mb-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: false, amount: 0.2 }}
@@ -69,9 +69,9 @@ const PricingSection = () => {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <span className="text-sm text-muted-foreground">Mensal</span>
+          <span className="text-sm text-gray-500">Mensal</span>
           <Switch checked={annual} onCheckedChange={setAnnual} />
-          <span className="text-sm text-foreground font-semibold">Anual</span>
+          <span className="text-sm text-gray-800 font-semibold">Anual</span>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6 items-stretch">
@@ -80,8 +80,8 @@ const PricingSection = () => {
               key={p.name}
               className={`relative rounded-2xl p-8 flex flex-col transition-all duration-300 backdrop-blur-xl ${
                 p.featured
-                  ? "bg-white/[0.1] border border-brand-red/30 shadow-[0_0_40px_hsl(0,100%,23%,0.15)] scale-[1.03] md:scale-105 ring-1 ring-brand-yellow/20"
-                  : "glass-card glass-card-hover"
+                  ? "bg-white border-2 border-brand-red/30 shadow-[0_0_40px_hsl(0,100%,23%,0.1)] scale-[1.03] md:scale-105 ring-1 ring-brand-yellow/20"
+                  : "bg-white/70 border border-gray-200/60 shadow-lg shadow-gray-200/30 hover:bg-white/90 hover:border-gray-300/60"
               }`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -96,7 +96,7 @@ const PricingSection = () => {
                   viewport={{ once: false, amount: 0.2 }}
                   transition={{ type: "spring", stiffness: 300, delay: 0.4 }}
                 >
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-red text-foreground px-4 py-1 text-xs font-bold border-0">
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-red text-white px-4 py-1 text-xs font-bold border-0">
                     MAIS VANTAJOSO
                   </Badge>
                 </motion.div>
@@ -104,7 +104,7 @@ const PricingSection = () => {
 
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-lg font-bold text-foreground">{p.name}</h3>
+                  <h3 className="text-lg font-bold text-gray-800">{p.name}</h3>
                   {p.discount && (
                     <Badge variant="outline" className="text-brand-navy border-brand-navy/40 text-[10px]">
                       {p.discount}
@@ -112,17 +112,17 @@ const PricingSection = () => {
                   )}
                 </div>
                 {p.subtitle && (
-                  <p className="text-xs text-muted-foreground">{p.subtitle}</p>
+                  <p className="text-xs text-gray-500">{p.subtitle}</p>
                 )}
               </div>
 
               <div className="mb-2">
-                <span className="text-4xl font-black text-foreground">R$ {p.price}</span>
-                <span className="text-sm text-muted-foreground">,00 {p.period}</span>
+                <span className="text-4xl font-black text-gray-800">R$ {p.price}</span>
+                <span className="text-sm text-gray-500">,00 {p.period}</span>
               </div>
 
               {p.detail && (
-                <p className="text-xs text-muted-foreground mb-2">{p.detail}</p>
+                <p className="text-xs text-gray-500 mb-2">{p.detail}</p>
               )}
               {p.extra && (
                 <p className="text-xs text-brand-green mb-4 leading-relaxed">{p.extra}</p>
@@ -132,8 +132,8 @@ const PricingSection = () => {
                 <Button
                   className={`w-full h-12 font-bold rounded-xl transition-all duration-300 hover:scale-[1.03] ${
                     p.featured
-                      ? "bg-brand-red hover:bg-brand-red/90 text-foreground shadow-[0_0_20px_hsl(0,100%,23%,0.3)]"
-                      : "bg-brand-navy hover:bg-brand-navy/90 text-foreground"
+                      ? "bg-brand-red hover:bg-brand-red/90 text-white shadow-[0_0_20px_hsl(0,100%,23%,0.3)]"
+                      : "bg-brand-navy hover:bg-brand-navy/90 text-white"
                   }`}
                 >
                   {p.cta}
@@ -144,17 +144,17 @@ const PricingSection = () => {
         </div>
 
         <motion.div
-          className="mt-14 glass-card rounded-2xl p-8 text-center max-w-3xl mx-auto"
+          className="mt-14 bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-lg shadow-gray-200/30 rounded-2xl p-8 text-center max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <p className="text-sm text-muted-foreground leading-relaxed">
+          <p className="text-sm text-gray-500 leading-relaxed">
             O custo de um embargo por erro pode custar{" "}
             <span className="text-brand-red font-semibold">50x o valor desta assinatura</span>.
             O BR AEROPORT 360 é o seu seguro contra falhas humanas.{" "}
-            <span className="text-foreground/60">Condições exclusivas para V1.0.</span>
+            <span className="text-gray-400">Condições exclusivas para V1.0.</span>
           </p>
         </motion.div>
       </div>
