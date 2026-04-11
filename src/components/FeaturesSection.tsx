@@ -19,9 +19,15 @@ const features = [
   },
 ];
 
+const getInitial = (i: number) => {
+  if (i === 0) return { x: -50, opacity: 0 };
+  if (i === 1) return { y: 50, opacity: 0 };
+  return { x: 50, opacity: 0 };
+};
+
 const FeaturesSection = () => {
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 bg-gray-50">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-4 text-brand-navy"
@@ -33,7 +39,7 @@ const FeaturesSection = () => {
           Os 3 Pilares
         </motion.h2>
         <motion.p
-          className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto"
+          className="text-center text-gray-500 mb-16 max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: false, amount: 0.2 }}
@@ -46,24 +52,24 @@ const FeaturesSection = () => {
           {features.map((f, i) => (
             <motion.div
               key={f.title}
-              className="glass-card glass-card-hover rounded-2xl p-8 group hover:-translate-y-1"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-lg shadow-gray-200/30 rounded-2xl p-8 group hover:-translate-y-1 hover:bg-white/90 hover:border-gray-300/60 transition-all duration-300"
+              initial={getInitial(i)}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
             >
               <motion.div
-                className="w-14 h-14 rounded-xl bg-brand-navy/20 flex items-center justify-center mb-6 group-hover:bg-brand-navy/30 transition-colors"
+                className="w-14 h-14 rounded-xl bg-brand-navy/10 flex items-center justify-center mb-6 group-hover:bg-brand-navy/20 transition-colors"
                 whileHover={{ rotate: 5, scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <f.icon className="w-7 h-7 text-brand-navy" />
               </motion.div>
-              <h3 className="text-xl font-bold mb-4 text-foreground">
+              <h3 className="text-xl font-bold mb-4 text-gray-800">
                 {f.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed text-sm">
+              <p className="text-gray-500 leading-relaxed text-sm">
                 {f.text}
               </p>
             </motion.div>
