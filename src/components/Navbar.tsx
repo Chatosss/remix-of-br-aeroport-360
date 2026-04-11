@@ -19,39 +19,43 @@ const Navbar = () => {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/10 backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/10"
-          : "bg-transparent"
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-50"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div
+        className={`flex items-center gap-1 rounded-full border border-white/10 bg-zinc-900/80 backdrop-blur-md px-3 py-2 shadow-lg shadow-black/20 transition-all duration-300 ${
+          scrolled ? "border-white/15" : ""
+        }`}
+      >
+        {/* Logo */}
         <img
           src="https://leonardopages.com/wp-content/uploads/2026/04/logo-vertical-br-color-scaled.png"
           alt="BR AEROPORT 360"
-          className="h-10 md:h-12 w-auto"
+          className="h-7 w-auto mr-2"
         />
 
-        <nav className="hidden md:flex items-center gap-6">
+        {/* Nav Links */}
+        <nav className="hidden md:flex items-center gap-1">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+              className="text-xs font-medium text-zinc-400 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/5 transition-all duration-200"
             >
               {link.label}
             </a>
           ))}
-          <a
-            href="#contato"
-            className="text-sm font-bold px-5 py-2 rounded-lg bg-brand-green hover:bg-brand-green-light text-white transition-all duration-300"
-          >
-            Começar Agora
-          </a>
         </nav>
+
+        {/* CTA Button */}
+        <a
+          href="#contato"
+          className="ml-2 text-xs font-bold px-4 py-1.5 rounded-full bg-brand-green hover:bg-brand-green-light text-white transition-all duration-300"
+        >
+          Começar Agora
+        </a>
       </div>
     </motion.header>
   );
