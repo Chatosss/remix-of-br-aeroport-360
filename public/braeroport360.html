@@ -384,6 +384,65 @@
     .footer-bottom .secure svg { width: 1rem; height: 1rem; color: var(--brand-green); }
     .footer-bottom .copy { font-size: 0.75rem; color: #6b7280; }
 
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Hero animations (play on load) */
+    .hero-badge { opacity: 0; animation: fadeInDown 0.6s 0.2s ease-out forwards; }
+    .hero-title { opacity: 0; animation: fadeInDown 0.7s 0.3s ease-out forwards; }
+    .hero-subtitle { opacity: 0; animation: fadeInDown 0.7s 0.4s ease-out forwards; }
+    .hero-video { opacity: 0; animation: fadeInUp 0.8s 0.5s ease-out forwards; }
+    .hero-video:hover { transform: scale(1.01); }
+    .hero-buttons { opacity: 0; animation: fadeInUp 0.7s 0.6s ease-out forwards; }
+
+    /* Scroll-triggered elements start hidden */
+    .anim-up, .anim-down, .anim-left, .anim-right, .anim-fade, .anim-scale {
+      opacity: 0;
+    }
+    .anim-up.visible { animation: fadeInUp 0.5s ease-out forwards; }
+    .anim-down.visible { animation: fadeInDown 0.5s ease-out forwards; }
+    .anim-left.visible { animation: fadeInLeft 0.5s ease-out forwards; }
+    .anim-right.visible { animation: fadeInRight 0.5s ease-out forwards; }
+    .anim-fade.visible { animation: fadeIn 0.6s ease-out forwards; }
+    .anim-scale.visible { animation: scaleIn 0.5s ease-out forwards; }
+
+    /* Hover effects matching React */
+    .feature-card { transition: transform 0.3s, background 0.3s, border-color 0.3s; }
+    .feature-icon-box { transition: background 0.3s, transform 0.3s; }
+    .feature-card:hover .feature-icon-box { transform: rotate(5deg) scale(1.1); }
+    .counter-card { transition: transform 0.3s, box-shadow 0.3s; }
+    .counter-card:hover { transform: translateY(-4px); }
+    .step-content { transition: transform 0.3s; }
+    .step-content:hover { transform: translateY(-4px); }
+    .pricing-card { transition: transform 0.3s, background 0.3s, border-color 0.3s; }
+    .cta-card { transition: transform 0.3s; }
+    .cta-card:hover { transform: translateY(-4px); }
+    .play-btn { transition: background 0.3s, transform 0.3s; }
+    .hero-video:hover .play-btn { background: rgba(255,255,255,0.15); transform: translate(-50%,-50%) scale(1.1); }
+
     /* ── SVG Icons (inline via CSS) ── */
   </style>
 </head>
