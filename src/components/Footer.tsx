@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <img src={logoColor} alt="BR AEROPORT 360" className="h-14 mb-4" />
             <p className="text-xs text-gray-500 leading-relaxed uppercase tracking-wide">
-              BR AEROPORT SOLUÇÕES TECNOLÓGICAS E INOVAÇÃO LTDA
+              BR AEROPORT TECNOLOGIA E INOVAÇÃO LTDA
             </p>
           </div>
 
@@ -20,12 +20,12 @@ const Footer = () => {
             <a href="mailto:comercial@braeroport360.com.br" className="flex items-center gap-2 text-sm text-gray-500 hover:text-brand-navy transition-colors">
               <Mail className="w-4 h-4" /> comercial@braeroport360.com.br
             </a>
-            <a href="https://wa.me/5528992577697" className="flex items-center gap-2 text-sm text-gray-500 hover:text-brand-navy transition-colors">
-              <Phone className="w-4 h-4" /> (28) 99257-7697
+            <a href="https://wa.me/5548992232756" className="flex items-center gap-2 text-sm text-gray-500 hover:text-brand-navy transition-colors">
+              <Phone className="w-4 h-4" /> (48) 99223-2756
             </a>
             <div className="flex items-start gap-2 text-sm text-gray-500">
               <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>Pref. Osmar Cunha, 416, Sala 1108 - Florianópolis, Centro - CEP: 88015-100, SC.</span>
+              <span>Av. Prefeito Osmar Cunha, n° 416, Sala 1108, Centro, Florianópolis – SC - CEP: 88.015-100</span>
             </div>
           </div>
 
