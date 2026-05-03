@@ -61,10 +61,9 @@ const HeroSection = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          O seu projeto ao redor do aeroporto{" "}
+          Segurança para quem opera, clareza para quem constrói,{" "}
           <br className="hidden sm:block" />
-          é um obstáculo? Descubra em{" "}
-          <span className="text-brand-yellow drop-shadow-[0_0_18px_rgba(252,193,0,0.55)]">milissegundos</span>.
+          análise aeronáutica em <span className="text-brand-yellow drop-shadow-[0_0_18px_rgba(252,193,0,0.55)]">segundos</span>.
         </motion.h1>
 
         {/* 3 - Subtitle */}
@@ -74,8 +73,8 @@ const HeroSection = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          O BR AEROPORT 360 é a ferramenta essencial para quem opera ou constrói
-          no entorno de aeródromos. Análise técnica autônoma, sem necessidade de consultoria externa.
+          O BR AEROPORT 360 é a ferramenta essencial para quem opera ou constrói no entorno de aeródromos. 
+          Mais produtividade, menos retrabalho: verifique obstáculos, superfícies e requisitos regulatórios de forma automática e imediata.
         </motion.p>
 
         {/* 4 - Video */}
