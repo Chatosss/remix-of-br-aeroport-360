@@ -151,10 +151,9 @@ const PricingSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <p className="text-sm text-gray-500 leading-relaxed">
-            O custo de um embargo por erro pode custar{" "}
+            O custo de um atraso por não conformidade evitável pode ser até{" "}
             <span className="text-brand-red font-semibold">50x o valor desta assinatura</span>.
-            O BR AEROPORT 360 é o seu seguro contra falhas humanas.{" "}
-            <span className="text-gray-400">Condições exclusivas para V1.0.</span>
+            O BR AEROPORT 360 foi criado para poupar seu tempo e evitar que problemas previsíveis atrasem o seu processo.
           </p>
         </motion.div>
       </div>
