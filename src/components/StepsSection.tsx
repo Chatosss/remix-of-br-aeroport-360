@@ -33,8 +33,7 @@ const StepsSection = () => {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          Da inserção de dados ao relatório final em{" "}
-          <span className="border-b-2 border-brand-yellow">3 passos simples</span>
+          Gestão Aeroportuária: Do Dado à Decisão em 3 Passos
         </motion.h2>
 
         <div className="relative">
