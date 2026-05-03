@@ -50,7 +50,7 @@ const PricingSection = () => {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          Escolha o plano que acompanha o ritmo dos seus projetos
+          Escolha o plano que acompanha a evolução dos seus projetos.
         </motion.h2>
         <motion.p
           className="text-center text-gray-500 mb-10"
@@ -59,7 +59,7 @@ const PricingSection = () => {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          Licenciamento completo com todas as funcionalidades inclusas.
+          Todos os recursos da plataforma disponíveis desde o primeiro dia.
         </motion.p>
 
         <motion.div
@@ -97,7 +97,7 @@ const PricingSection = () => {
                   transition={{ type: "spring", stiffness: 300, delay: 0.4 }}
                 >
                   <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-red text-white px-4 py-1 text-xs font-bold border-0">
-                    MAIS VANTAJOSO
+                    Opção 1 (recomendada)
                   </Badge>
                 </motion.div>
               )}
