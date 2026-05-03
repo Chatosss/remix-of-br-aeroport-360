@@ -290,54 +290,32 @@
     .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: stretch; }
     @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
     .pricing-card {
-      position: relative; border-radius: 1rem; padding: 2rem;
+      position: relative; border-radius: 1.5rem; padding: 2rem;
       display: flex; flex-direction: column; transition: all 0.3s;
-      background: rgba(255,255,255,0.7); backdrop-filter: blur(16px);
-      border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 10px 25px rgba(229,231,235,0.3);
+      background: #fff;
+      border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      height: 100%;
     }
-    .pricing-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.9); border-color: rgba(209,213,219,0.6); }
-    .pricing-card.featured {
-      background: #fff; border: 2px solid rgba(118,0,0,0.3);
-      box-shadow: 0 0 40px rgba(118,0,0,0.1); transform: scale(1.03);
-      ring: 1px solid rgba(252,193,0,0.2);
-    }
-    @media (min-width: 768px) { .pricing-card.featured { transform: scale(1.05); } }
-    .pricing-card.featured:hover { transform: scale(1.06); }
-    .pricing-badge-top {
-      position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);
-      background: var(--brand-red); color: #fff; padding: 0.25rem 1rem;
-      border-radius: 9999px; font-size: 0.75rem; font-weight: 700; white-space: nowrap;
-    }
-    .plan-header { margin-bottom: 1.5rem; }
-    .plan-name-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; }
-    .plan-name { font-size: 1.125rem; font-weight: 700; color: #1f2937; }
-    .plan-discount {
-      font-size: 10px; font-weight: 600; color: var(--brand-navy);
-      border: 1px solid rgba(76,73,237,0.4); border-radius: 9999px; padding: 0.125rem 0.5rem;
-    }
-    .plan-subtitle { font-size: 0.75rem; color: #6b7280; }
-    .plan-price { margin-bottom: 0.5rem; }
-    .plan-price .amount { font-size: 2.5rem; font-weight: 900; color: #1f2937; }
-    .plan-price .period { font-size: 0.875rem; color: #6b7280; }
-    .plan-detail { font-size: 0.75rem; color: #6b7280; margin-bottom: 0.5rem; }
-    .plan-extra { font-size: 0.75rem; color: var(--brand-green); margin-bottom: 1rem; line-height: 1.5; }
-    .plan-cta-area { margin-top: auto; padding-top: 1.5rem; }
+    .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 20px 30px rgba(0,0,0,0.1); }
+    .pricing-card h3 { font-size: 1.25rem; font-weight: 800; color: #111827; margin-bottom: 0.75rem; line-height: 1.3; }
+    .pricing-card p { font-size: 0.875rem; color: #6b7280; line-height: 1.6; margin-bottom: 1.5rem; }
+    .pricing-features { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .pricing-features p { margin-bottom: 0; color: #374151; font-weight: 500; }
     .btn-plan {
-      width: 100%; height: 3rem; font-weight: 700; border-radius: 0.75rem;
+      width: 100%; height: 3.5rem; font-weight: 700; border-radius: 0.75rem;
       border: none; cursor: pointer; font-size: 0.875rem; color: #fff;
-      transition: all 0.3s;
+      transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.05em;
     }
-    .btn-plan.navy { background: var(--brand-navy); }
-    .btn-plan.navy:hover { opacity: 0.9; transform: scale(1.03); }
-    .btn-plan.red { background: var(--brand-red); box-shadow: 0 0 20px rgba(118,0,0,0.3); }
-    .btn-plan.red:hover { opacity: 0.9; transform: scale(1.03); }
+    .btn-plan:hover { filter: brightness(1.1); transform: scale(1.02); }
+    .pricing-box small { color: #9ca3af; font-size: 0.7rem; display: block; }
+    .pricing-box p { margin-bottom: 0; color: inherit; }
     .pricing-footnote {
       margin-top: 3.5rem; max-width: 48rem; margin-left: auto; margin-right: auto;
       background: rgba(255,255,255,0.7); backdrop-filter: blur(16px);
       border: 1px solid rgba(229,231,235,0.6); box-shadow: 0 10px 25px rgba(229,231,235,0.3);
       border-radius: 1rem; padding: 2rem; text-align: center;
     }
-    .pricing-footnote p { font-size: 0.875rem; color: #6b7280; line-height: 1.7; }
+    .pricing-footnote p { font-size: 0.875rem; color: #6b7280; line-height: 1.7; margin-bottom: 0; }
     .pricing-footnote .red-text { color: var(--brand-red); font-weight: 600; }
     .pricing-footnote .dim { color: #9ca3af; }
 
@@ -663,64 +641,50 @@
     <h2 class="section-title text-center anim-up">Escolha o plano que acompanha a evolução dos seus projetos.</h2>
     <p class="section-subtitle text-center anim-fade" style="animation-delay:0.15s">Todos os recursos da plataforma disponíveis desde o primeiro dia.</p>
 
-    <div class="pricing-toggle">
-      <span>Mensal</span>
-      <div class="toggle-switch on" id="pricingToggle" onclick="this.classList.toggle('on')">
-        <div class="toggle-knob"></div>
-      </div>
-      <span class="active">Anual</span>
-    </div>
-
     <div class="pricing-grid">
-      <!-- Mensal -->
-      <div class="pricing-card anim-up" style="animation-delay:0s">
-        <div class="plan-header">
-          <div class="plan-name-row"><span class="plan-name">MENSAL</span></div>
-          <span class="plan-subtitle">Projetos Pontuais</span>
+      <!-- Card 1 -->
+      <div class="pricing-card anim-up" style="animation-delay:0s; border: 2px solid #60A5FA;">
+        <h3>AeroProfissional: Produtividade Individual</h3>
+        <p>Emita laudos técnicos com rapidez e reduza o retrabalho desde o primeiro projeto.</p>
+        <div class="pricing-features">
+          <p>👤 Público: Consultores independentes</p>
+          <p>👥 Acesso: Individual</p>
+          <p>🌍 Abrangência: Por Usuário</p>
         </div>
-        <div class="plan-price">
-          <span class="amount">R$ 25.000</span><span class="period">,00 /mês</span>
+        <div class="pricing-box" style="background: #F3F4F6; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+          <small>Investimento Profissional:</small>
+          <div style="font-size: 1.5rem; font-weight: 800;">R$ 15.000 / mês</div>
+          <small>Valor inicial para acesso ao motor de análise e relatórios técnicos exclusivos.</small>
         </div>
-        <div class="plan-cta-area">
-          <button class="btn-plan navy">Assinar Plano Mensal</button>
-        </div>
+        <button class="btn-plan" style="background: #2563EB;">COMEÇAR AGORA</button>
       </div>
 
-      <!-- Semestral -->
-      <div class="pricing-card anim-up" style="animation-delay:0.15s">
-        <div class="plan-header">
-          <div class="plan-name-row">
-            <span class="plan-name">SEMESTRAL</span>
-            <span class="plan-discount">-20%</span>
-          </div>
-          <span class="plan-subtitle">Continuidade Técnica</span>
+      <!-- Card 2 -->
+      <div class="pricing-card anim-up" style="animation-delay:0.15s; border: 2px solid #34D399;">
+        <h3>AeroGov: Gestão Territorial Municipal</h3>
+        <p>Transforme dados aeronáuticos em decisões seguras para o planejamento urbano e proteção jurídica.</p>
+        <div class="pricing-features">
+          <p>🏢 Público: Prefeituras</p>
+          <p>👥 Acesso: Multi-usuários</p>
+          <p>🌍 Abrangência: Municipal</p>
         </div>
-        <div class="plan-price">
-          <span class="amount">R$ 20.000</span><span class="period">,00 /mês</span>
-        </div>
-        <p class="plan-detail">Parcela única de R$ 120.000,00</p>
-        <div class="plan-cta-area">
-          <button class="btn-plan navy">Assinar Plano Semestral</button>
-        </div>
+        <button class="btn-plan" style="background: #059669; margin-top: auto;">AGENDAR DEMONSTRAÇÃO</button>
       </div>
 
-      <!-- Anual -->
-      <div class="pricing-card featured anim-up" style="animation-delay:0.3s">
-        <div class="pricing-badge-top">Opção 1 (recomendada)</div>
-        <div class="plan-header">
-          <div class="plan-name-row">
-            <span class="plan-name">ANUAL</span>
-            <span class="plan-discount">-60%</span>
-          </div>
+      <!-- Card 3 -->
+      <div class="pricing-card anim-up" style="animation-delay:0.3s; border: 2px solid #A78BFA;">
+        <h3>AeroEnterprise: Proteção Sistêmica</h3>
+        <p>Evite riscos operacionais e prejuízos milionários com inteligência estratégica em larga escala.</p>
+        <div class="pricing-features">
+          <p>🛡️ Público: Corporações</p>
+          <p>👥 Acesso: Integração Total</p>
+          <p>🌍 Abrangência: Nacional</p>
         </div>
-        <div class="plan-price">
-          <span class="amount">R$ 9.900</span><span class="period">,00 /mês</span>
+        <div class="pricing-box" style="background: #F5F3FF; border: 1px solid #A78BFA; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+          <p><strong>Integração Total e SLA Prioritário:</strong> Abrangência nacional com suporte prioritário e relatórios executivos para múltiplos aeroportos.</p>
         </div>
-        <p class="plan-detail">Pagamento único de R$ 118.800,00</p>
-        <p class="plan-extra">6 meses de bonificação no valor total.</p>
-        <div class="plan-cta-area">
-          <button class="btn-plan red">Garantir Licença Anual</button>
-        </div>
+        <p><strong>Soluções Sob Medida:</strong> Preço customizado conforme a necessidade de integração e escala da organização.</p>
+        <button class="btn-plan" style="background: #7C3AED;">FALAR COM CONSULTOR</button>
       </div>
     </div>
 
