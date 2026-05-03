@@ -9,7 +9,7 @@ const features = [
   },
   {
     icon: Globe,
-    title: "Integração com Google Earth",
+    title: "Visualização 3D Integrada",
     text: "Transforme dados abstratos em decisões visuais. Tecnologia de visualização 3D dos seus projetos diretamente no Google Earth.",
   },
   {
@@ -36,7 +36,7 @@ const FeaturesSection = () => {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          Os 3 Pilares
+          Tecnologia que transforma análises aeronáuticas em produtividade.
         </motion.h2>
         <motion.p
           className="text-center text-gray-500 mb-16 max-w-2xl mx-auto"
@@ -45,7 +45,7 @@ const FeaturesSection = () => {
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          Tecnologia de ponta aplicada à engenharia aeroportuária
+          Três pilares fundamentais para o sucesso do seu projeto
         </motion.p>
 
         <div className="grid md:grid-cols-3 gap-8">
