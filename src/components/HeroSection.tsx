@@ -47,8 +47,8 @@ const HeroSection = () => {
         >
           <div className="flex -space-x-2 items-center">
             <div className="relative mr-2">
-              <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-75"></span>
-              <span className="relative block w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></span>
+              <span className="absolute inset-0 rounded-full bg-blue-500 animate-ping opacity-75"></span>
+              <span className="relative block w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]"></span>
             </div>
             {AVATARS.map((a, i) => (
               <Avatar key={i} className="h-7 w-7 border-2 border-zinc-900">
