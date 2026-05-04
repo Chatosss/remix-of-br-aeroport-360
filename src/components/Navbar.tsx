@@ -6,6 +6,7 @@ const NAV_LINKS = [
 ];
 
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import DemoModal from "./DemoModal";
 
 const Navbar = () => {
