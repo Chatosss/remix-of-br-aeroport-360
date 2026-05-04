@@ -29,6 +29,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/ # OBRIGATÓRIO: envia apenas a pasta compilada, não o código sujo
-          server-dir: ./public_html/ # Pasta raiz da Hostinger
+          local-dir: ./dist/ 
+          server-dir: ./ # Pasta raiz da Hostinger
           timeout: 300000 # Aumenta o tempo de conexão para evitar o Timeout
