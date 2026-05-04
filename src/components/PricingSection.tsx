@@ -5,6 +5,14 @@ import { User, Users, Globe, BarChart3, Building2, ShieldCheck } from "lucide-re
 import DemoModal from "./DemoModal";
 
 const PricingSection = () => {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("");
+
+  const handleOpenDemo = (plan: string) => {
+    setSelectedPlan(plan);
+    setIsDemoModalOpen(true);
+  };
+
   return (
     <section id="planos" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
