@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Play, ArrowRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import DemoModal from "./DemoModal";
 
 const heroBg = "https://leonardopages.com/wp-content/uploads/2026/03/hero-bg-C0UKtHim.jpg";
 
@@ -14,6 +16,7 @@ const AVATARS = [
 ];
 
 const HeroSection = () => {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image */}
@@ -114,22 +117,21 @@ const HeroSection = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
-          <Button
-            size="lg"
-            className="h-12 px-8 text-sm font-bold rounded-full bg-brand-green text-white shadow-[0_0_20px_rgba(0,94,55,0.4)] hover:shadow-[0_0_35px_rgba(0,94,55,0.6)] hover:scale-105 transition-all duration-300"
-          >
-            Conhecer a plataforma
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="h-12 px-8 text-sm font-bold rounded-full border-white/20 text-zinc-300 bg-transparent hover:bg-white/5 hover:border-white/30 transition-all duration-300"
-          >
-            Ver Demonstração
-          </Button>
+          <a href="#funcionalidades">
+            <Button
+              size="lg"
+              className="h-12 px-8 text-sm font-bold rounded-full bg-brand-green text-white shadow-[0_0_20px_rgba(0,94,55,0.4)] hover:shadow-[0_0_35px_rgba(0,94,55,0.6)] hover:scale-105 transition-all duration-300"
+            >
+              Conhecer a plataforma
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </a>
         </motion.div>
       </div>
+      <DemoModal 
+        isOpen={isDemoModalOpen} 
+        onOpenChange={setIsDemoModalOpen} 
+      />
 
       {/* Bottom fade gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-black/50 pointer-events-none" />

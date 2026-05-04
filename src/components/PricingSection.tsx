@@ -78,7 +78,10 @@ const PricingSection = () => {
               </p>
             </div>
 
-            <Button className="w-full h-14 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl tracking-wider uppercase">
+            <Button 
+              className="w-full h-14 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl tracking-wider uppercase"
+              onClick={() => handleOpenDemo("AeroProfissional")}
+            >
               COMEÇAR AGORA
             </Button>
           </motion.div>
