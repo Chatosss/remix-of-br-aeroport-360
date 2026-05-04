@@ -5,7 +5,12 @@ const NAV_LINKS = [
   { label: "FAQ", href: "#faq" },
 ];
 
+import { useState } from "react";
+import DemoModal from "./DemoModal";
+
 const Navbar = () => {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+
   return (
     <div className="fixed top-6 inset-x-0 flex justify-center z-[100] pointer-events-none w-full">
       <nav className="pointer-events-auto flex items-center justify-center gap-8 bg-zinc-900/80 backdrop-blur-md border border-white/10 rounded-full px-8 py-4 shadow-xl">
@@ -29,13 +34,17 @@ const Navbar = () => {
           ))}
         </div>
 
-        <a
-          href="#contato"
-          className="rounded-full bg-brand-green px-6 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:bg-brand-green-light"
+        <Button
+          onClick={() => setIsDemoModalOpen(true)}
+          className="rounded-full bg-brand-green px-6 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:bg-brand-green-light border-none h-auto"
         >
           Começar Agora
-        </a>
+        </Button>
       </nav>
+      <DemoModal 
+        isOpen={isDemoModalOpen} 
+        onOpenChange={setIsDemoModalOpen} 
+      />
     </div>
   );
 };
