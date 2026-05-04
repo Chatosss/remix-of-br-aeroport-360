@@ -24,6 +24,8 @@ const HeroSection = () => {
         src={heroBg}
         alt=""
         className="absolute inset-0 w-full h-full object-cover"
+        fetchPriority="high"
+        loading="eager"
       />
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-zinc-950/85 to-zinc-950" />
@@ -92,6 +94,7 @@ const HeroSection = () => {
             src={heroBg}
             alt="Vídeo de apresentação"
             className="absolute inset-0 w-full h-full object-cover opacity-25"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           <div className="absolute inset-0 flex items-center justify-center">
