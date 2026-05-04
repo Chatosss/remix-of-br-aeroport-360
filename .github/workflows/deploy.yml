@@ -30,5 +30,5 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/ 
-          server-dir: ./ # Pasta raiz da Hostinger
-          timeout: 300000 # Aumenta o tempo de conexão para evitar o Timeout
+          server-dir: ./domains/braeroport360.com.br/public_html/
+          timeout: 300000
