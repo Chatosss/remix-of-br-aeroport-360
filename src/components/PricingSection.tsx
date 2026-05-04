@@ -1,8 +1,18 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { User, Users, Globe, BarChart3, Building2, ShieldCheck } from "lucide-react";
+import DemoModal from "./DemoModal";
 
 const PricingSection = () => {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("");
+
+  const handleOpenDemo = (plan: string) => {
+    setSelectedPlan(plan);
+    setIsDemoModalOpen(true);
+  };
+
   return (
     <section id="planos" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -106,7 +116,10 @@ const PricingSection = () => {
 
             <div className="flex-grow"></div>
 
-            <Button className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl tracking-wider uppercase">
+            <Button 
+              className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl tracking-wider uppercase"
+              onClick={() => handleOpenDemo("AeroGov")}
+            >
               AGENDAR DEMONSTRAÇÃO
             </Button>
           </motion.div>
@@ -154,7 +167,10 @@ const PricingSection = () => {
               <span className="text-xs text-gray-500 ml-1">Preço customizado conforme a necessidade de integração e escala da organização.</span>
             </div>
 
-            <Button className="w-full h-14 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl tracking-wider uppercase">
+            <Button 
+              className="w-full h-14 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl tracking-wider uppercase"
+              onClick={() => handleOpenDemo("AeroEnterprise")}
+            >
               FALAR COM CONSULTOR
             </Button>
           </motion.div>
@@ -174,6 +190,11 @@ const PricingSection = () => {
           </p>
         </motion.div>
       </div>
+      <DemoModal 
+        isOpen={isDemoModalOpen} 
+        onOpenChange={setIsDemoModalOpen} 
+        defaultPlan={selectedPlan} 
+      />
     </section>
   );
 };
