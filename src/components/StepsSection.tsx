@@ -30,7 +30,7 @@ const StepsSection = () => {
           className="text-3xl md:text-4xl font-bold text-center mb-16 text-brand-navy"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
           Gestão Aeroportuária: Do Dado à Decisão em 3 Passos
@@ -48,7 +48,7 @@ const StepsSection = () => {
                 }`}
                 initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
               >
                 <div className="flex-1 bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-lg shadow-gray-200/30 rounded-2xl p-6">
@@ -67,7 +67,7 @@ const StepsSection = () => {
                   className="relative z-10 w-16 h-16 rounded-full bg-brand-navy/10 border-2 border-brand-navy/30 flex items-center justify-center shrink-0 backdrop-blur-sm"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  viewport={{ once: false, amount: 0.2 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{ type: "spring", stiffness: 200, delay: i * 0.15 + 0.2 }}
                   whileHover={{ scale: 1.15 }}
                 >

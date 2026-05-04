@@ -34,7 +34,7 @@ function AnimatedNumber({ value, prefix, suffix, decimals = 0, inView }: { value
 
 const CountersSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: false, amount: 0.2 });
+  const inView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <section ref={ref} className="py-16 px-6 bg-white relative">
@@ -46,7 +46,7 @@ const CountersSection = () => {
               className="text-center bg-white backdrop-blur-xl border border-gray-200/60 shadow-2xl shadow-black/10 rounded-2xl p-8"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
             >
               <c.icon className="w-8 h-8 text-brand-navy mx-auto mb-3" />

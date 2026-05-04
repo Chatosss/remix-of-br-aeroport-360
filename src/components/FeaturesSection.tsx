@@ -33,7 +33,7 @@ const FeaturesSection = () => {
           className="text-3xl md:text-4xl font-bold text-center mb-4 text-brand-navy"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
           Tecnologia que transforma análises aeronáuticas em produtividade.
@@ -42,7 +42,7 @@ const FeaturesSection = () => {
           className="text-center text-gray-500 mb-16 max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           Três pilares fundamentais para o sucesso do seu projeto
@@ -55,7 +55,7 @@ const FeaturesSection = () => {
               className="bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-lg shadow-gray-200/30 rounded-2xl p-8 group hover:-translate-y-1 hover:bg-white/90 hover:border-gray-300/60 transition-all duration-300"
               initial={getInitial(i)}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
             >
