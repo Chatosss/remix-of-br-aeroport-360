@@ -45,7 +45,11 @@ const HeroSection = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="flex -space-x-2">
+          <div className="flex -space-x-2 items-center">
+            <div className="relative mr-2">
+              <span className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-75"></span>
+              <span className="relative block w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.8)]"></span>
+            </div>
             {AVATARS.map((a, i) => (
               <Avatar key={i} className="h-7 w-7 border-2 border-zinc-900">
                 <AvatarFallback className={`${a.color} text-[10px] font-bold text-white`}>
