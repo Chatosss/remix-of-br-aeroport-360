@@ -31,7 +31,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-24 px-6 bg-gray-50">
+    <section id="faq" className="py-24 px-6 bg-gray-50">
       <div className="max-w-3xl mx-auto">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-14 text-brand-navy"

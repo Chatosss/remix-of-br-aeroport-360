@@ -80,7 +80,7 @@ const PricingSection = () => {
 
             <Button 
               className="w-full h-14 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl tracking-wider uppercase"
-              onClick={() => handleOpenDemo("AeroProfissional")}
+              onClick={() => window.open("https://wa.me/5511999999999", "_blank")}
             >
               COMEÇAR AGORA
             </Button>
