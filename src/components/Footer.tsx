@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <img src={logoColor} alt="BR AEROPORT 360" className="h-14 mb-4" />
+            <img src={logoColor} alt="BR AEROPORT 360" className="h-24 w-auto mb-4" />
             <p className="text-xs text-gray-500 leading-relaxed uppercase tracking-wide">
               BR AEROPORT TECNOLOGIA E INOVAÇÃO LTDA
             </p>
