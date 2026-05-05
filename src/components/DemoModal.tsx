@@ -76,18 +76,37 @@ const DemoModal = ({ isOpen, onOpenChange, defaultPlan }: DemoModalProps) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    console.log("Form values:", values);
-    
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    toast({
-      title: "Solicitação Enviada!",
-      description: "Nossa equipe entrará em contato para agendar sua demonstração.",
-    });
-    form.reset();
-    onOpenChange(false);
+    try {
+      const response = await fetch("https://braeroport360.com.br/enviar.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...values,
+          formulario: "Pop-up",
+        }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Solicitação Enviada!",
+          description: "Nossa equipe entrará em contato para agendar sua demonstração.",
+        });
+        form.reset();
+        onOpenChange(false);
+      } else {
+        throw new Error("Erro no servidor");
+      }
+    } catch (error) {
+      toast({
+        title: "Erro ao enviar",
+        description: "Ocorreu um problema ao enviar sua solicitação. Tente novamente mais tarde.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {

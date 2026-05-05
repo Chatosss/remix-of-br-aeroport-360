@@ -47,17 +47,36 @@ const ContactForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    console.log("Contact form values:", values);
-    
-    // Simulating form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    toast({
-      title: "Mensagem Enviada!",
-      description: "Entraremos em contato o mais breve possível.",
-    });
-    form.reset();
+    try {
+      const response = await fetch("https://braeroport360.com.br/enviar.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...values,
+          formulario: "Rodapé",
+        }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Mensagem Enviada!",
+          description: "Entraremos em contato o mais breve possível.",
+        });
+        form.reset();
+      } else {
+        throw new Error("Erro no servidor");
+      }
+    } catch (error) {
+      toast({
+        title: "Erro ao enviar",
+        description: "Ocorreu um problema ao enviar sua mensagem. Tente novamente mais tarde.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
