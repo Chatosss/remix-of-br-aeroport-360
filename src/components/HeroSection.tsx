@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { Play, ArrowRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import DemoModal from "./DemoModal";
+import heroBg from "@/assets/hero02.webp";
 
-const heroBg = "/src/assets/hero02.webp";
 
 const AVATARS = [
   { initials: "RC", color: "bg-blue-600" },
