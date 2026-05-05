@@ -5,7 +5,7 @@ import { Play, ArrowRight } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import DemoModal from "./DemoModal";
 
-const heroBg = "/src/assets/hero-bg.jpg";
+const heroBg = "/src/assets/hero02.webp";
 
 const AVATARS = [
   { initials: "RC", color: "bg-blue-600" },
