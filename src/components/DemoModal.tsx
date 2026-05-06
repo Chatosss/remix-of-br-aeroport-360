@@ -84,7 +84,7 @@ const DemoModal = ({ isOpen, onOpenChange, defaultPlan }: DemoModalProps) => {
         },
         body: JSON.stringify({
           ...values,
-          formulario: "Pop-up",
+          formulario: "Planos",
         }),
       });
 
