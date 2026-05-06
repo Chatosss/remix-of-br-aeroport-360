@@ -15,11 +15,11 @@ const Navbar = () => {
   return (
     <div className="fixed top-6 inset-x-0 flex justify-center z-[100] pointer-events-none w-full">
       <nav className="pointer-events-auto flex items-center justify-center gap-8 bg-zinc-900/80 backdrop-blur-md border border-white/10 rounded-full px-8 py-4 shadow-xl">
-        <a href="#" aria-label="BR AEROPORT 360" className="shrink-0 flex items-center justify-center bg-white rounded-full w-12 h-12">
+        <a href="#" aria-label="BR AEROPORT 360" className="shrink-0 flex items-center justify-center bg-white rounded-full w-12 h-12 p-2">
           <img
             src="https://leonardopages.com/wp-content/uploads/2026/04/logo-vertical-br-color-scaled.png"
             alt="BR AEROPORT 360"
-            className="h-8 w-auto"
+            className="h-full w-auto object-contain"
           />
         </a>
 

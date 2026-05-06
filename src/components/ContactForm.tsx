@@ -55,7 +55,7 @@ const ContactForm = () => {
         },
         body: JSON.stringify({
           ...values,
-          formulario: "Rodapé",
+          formulario: "Dúvidas",
         }),
       });
 
